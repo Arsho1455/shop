@@ -1,0 +1,53 @@
+/* Independent, responsive sign-in layout: never uses shop header/footer. */
+.adm-login-screen { min-height:100vh; min-height:100dvh; background:#edf0f7; color:#182643; font-family:inherit; }
+.adm-login-screen * { box-sizing:border-box; }
+.adm-login-layout { display:grid; grid-template-columns:minmax(360px,.92fr) minmax(420px,1.08fr); min-height:100vh; min-height:100dvh; max-width:1800px; margin:auto; background:#fff; box-shadow:0 28px 110px #1b254912; }
+.adm-login-story { position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; padding:48px clamp(32px,5vw,90px) 38px; background:radial-gradient(circle at 0% 100%,#5a59b4 0,transparent 43%),linear-gradient(142deg,#0b1730 8%,#182a53 57%,#21215a 100%); color:#fff; }
+.adm-login-logo,.adm-login-logo-icon,.adm-login-story-badge,.adm-login-story li,.adm-login-story li>span,.adm-login-panel-safe { display:flex; align-items:center; }
+.adm-login-logo { position:relative;z-index:2; gap:14px;font-size:27px;line-height:1;font-weight:850;letter-spacing:-1.2px; }
+.adm-login-logo strong { color:#a49aff; }
+.adm-login-logo small { display:block;margin-top:9px;font-size:9px;letter-spacing:2.5px;color:#9aaacf;font-weight:750; }
+.adm-login-logo-icon { width:53px;height:53px;justify-content:center;background:#685bee;border-radius:17px;box-shadow:0 12px 30px #17123d66; }
+.adm-login-story-center { position:relative;z-index:2;margin:auto 0;padding:95px 0 105px; }
+.adm-login-story-badge { width:max-content;max-width:100%;gap:9px;padding:10px 15px;border:1px solid #8187d25c;border-radius:100px;background:#b9b5f113;color:#cdcafa; font-size:11px; letter-spacing:1.5px;font-weight:800; }
+.adm-login-story h1 { font-size:clamp(38px,4vw,67px);line-height:1.12;letter-spacing:-2.1px;max-width:640px;font-weight:850;margin:26px 0 18px; }
+.adm-login-story p { color:#adb9d4;font-size:16px;line-height:1.85;max-width:460px;margin:0 0 43px; }
+.adm-login-story ul { list-style:none;max-width:420px;margin:0;padding:0;display:grid;gap:11px; }
+.adm-login-story li { gap:14px; background:#ffffff0b;border:1px solid #ffffff1a; border-radius:16px;padding:13px 16px;color:#e3e8fd;font-size:13px;font-weight:700;backdrop-filter:blur(8px); }
+.adm-login-story li>span { justify-content:center;width:38px;height:38px;color:#b6adff;background:#8278ef24;border-radius:10px; }
+.adm-login-story li>svg:last-child {margin-left:auto;color:#a9dccc;}
+.adm-login-story-foot {position:relative;z-index:2;font-size:10px;letter-spacing:1.3px;color:#7285ab;font-weight:750;}
+.adm-login-story-asterisk{color:#7a75e0;padding:0 10px;}
+.adm-login-orb { position:absolute;z-index:0;pointer-events:none;display:block;border-radius:50%;border:1px solid #c7c5ff20; }
+.adm-login-orb.orb-one { width:560px;height:560px;right:-350px;top:24%;box-shadow:0 0 0 100px #c7c5ff05,0 0 0 200px #c7c5ff04; }
+.adm-login-orb.orb-two {width:320px;height:320px;bottom:-220px;left:-180px;background:#7268f010;}
+.adm-login-form-panel { position:relative;display:flex; flex-direction:column; justify-content:center;align-items:center; min-width:0;padding:85px 36px 75px; }
+.adm-login-languages { position:absolute;top:39px;right:clamp(24px,5vw,85px);display:flex;align-items:center;gap:4px;background:#f3f4fa;padding:5px;border-radius:11px; }
+.adm-login-languages button {font-family:inherit;border:0;border-radius:8px;padding:9px 12px;background:none;color:#8b94a7;font-size:12px;font-weight:800;cursor:pointer;}
+.adm-login-languages button[aria-pressed=true] {color:#6759df;background:#fff;box-shadow:0 2px 9px #121a2610;}
+.adm-login-form-wrap { width:min(100%,445px); }
+.adm-login-symbol { display:grid;place-items:center;width:68px;height:68px;border-radius:20px;color:#6d5de9;background:#efedff;margin-bottom:28px; }
+.adm-login-eyebrow {font-size:11px;font-weight:900;letter-spacing:2.2px;color:#7264e6;}
+.adm-login-form-wrap h2 {font-size:clamp(31px,3.7vw,46px);font-weight:850;letter-spacing:-1.7px;margin:12px 0 13px;color:#14233e;}
+.adm-login-dot {color:#7061e7;}
+.adm-login-description {font-size:14px;line-height:1.85;color:#8a98ad;max-width:430px;margin:0 0 35px;}
+.adm-login-form {display:flex;flex-direction:column;}
+.adm-login-form>label {font-size:12px;font-weight:800;color:#394860;margin-bottom:10px;}
+.adm-login-input-frame {display:flex;align-items:center;gap:12px;padding:0 16px;border-radius:13px;border:1.5px solid #e6e9f2;min-height:57px; color:#a0aabe;margin-bottom:25px;transition:border-color .2s,box-shadow .2s;}
+.adm-login-input-frame:focus-within {border-color:#7161e7;box-shadow:0 0 0 4px #7464e914;}
+.adm-login-input-frame input {min-width:0;flex:1;color:#1b2a45;font-size:14px;background:transparent;border:none;outline:none;height:53px;font-family:inherit;}
+.adm-login-input-frame input::placeholder {color:#b2bbca;}
+.adm-password-toggle {color:#7566df;background:none;border:0;cursor:pointer;font-size:11px;font-weight:800;white-space:nowrap;font-family:inherit;}
+.adm-login-submit {display:flex;justify-content:center;align-items:center;gap:15px;width:100%;min-height:58px;margin-top:2px;color:white;border:0;border-radius:13px;background:linear-gradient(105deg,#7769ed,#6553d7);box-shadow:0 14px 29px #6d5ee83a;font-size:14px;font-weight:850;font-family:inherit;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.adm-login-submit:hover:not(:disabled) {transform:translateY(-1px);box-shadow:0 18px 31px #6d5ee84b;}
+.adm-login-submit:disabled {opacity:.65;cursor:wait;}
+.adm-login-error {color:#b53645;background:#fff1f3;border:1px solid #ffd6de;padding:13px 15px;border-radius:10px;font-size:12px;margin-bottom:20px;}
+.adm-login-guard {display:flex;align-items:center;justify-content:center;gap:10px;padding:25px 0;margin-top:25px;border-top:1px solid #ecedf5;font-size:12px;color:#8996a9;text-align:center;}
+.adm-login-guard svg {color:#7669e0;flex-shrink:0;}
+.adm-login-back {display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;color:#685ad8;font-size:13px;font-weight:800;}
+.adm-login-back:hover{text-decoration:underline;}
+.adm-login-panel-foot {position:absolute;bottom:29px;left:36px;right:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:10px;color:#b0b9c8;}
+.adm-login-panel-safe {gap:7px;}
+@media(max-width:1050px){.adm-login-layout{grid-template-columns:minmax(300px,.9fr) minmax(350px,1.1fr)}.adm-login-story{padding:35px}.adm-login-story-center{padding:70px 0}.adm-login-story h1{font-size:41px}}
+@media(max-width:760px){.adm-login-layout{display:block;min-height:100dvh}.adm-login-story{min-height:0;padding:22px 24px;background:#111f42}.adm-login-story-center,.adm-login-story-foot,.adm-login-orb{display:none}.adm-login-logo{font-size:22px}.adm-login-logo-icon{width:42px;height:42px}.adm-login-form-panel{min-height:calc(100dvh - 91px);padding:100px 22px 85px}.adm-login-languages{top:24px;right:22px}.adm-login-form-wrap{max-width:445px}.adm-login-panel-foot{left:22px;right:22px}.adm-login-form-wrap h2{font-size:37px}}
+@media(max-width:390px){.adm-login-panel-foot{flex-direction:column;gap:7px}.adm-login-form-panel{padding-bottom:105px}.adm-login-description{margin-bottom:26px}}

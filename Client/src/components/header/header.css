@@ -1,0 +1,69 @@
+.header { position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.97); box-shadow: 0 2px 22px rgba(29,30,70,.045); backdrop-filter: blur(16px); }
+.shop-topline { background: #25233e; color: #f2efff; font-size: 11px; font-weight: 650; }
+.shop-topline-inner { min-height: 33px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.shop-topline-inner span { display: inline-flex; align-items: center; gap: 8px; }
+.shop-topline-inner svg { color: #b6aeff; }
+.shop-main-header { border-bottom: 1px solid #efeff6; }
+.shop-header-inner { height: 77px; display: flex; align-items: center; gap: clamp(18px, 2.5vw, 36px); }
+.shop-logo { display: flex; align-items: center; flex-shrink: 0; gap: 10px; white-space: nowrap; color: #222440; text-decoration: none; font-size: 22px; font-weight: 900; letter-spacing: -1.15px; }
+.shop-logo-symbol { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 13px; background: linear-gradient(145deg,#7c70ff,#5142dc); box-shadow: 0 7px 15px #7469eb40; color: white; }
+.shop-logo-highlight { color: #6355e7; }
+.shop-logo-period { color: #ffad70; }
+.shop-nav { display: flex; align-items: center; gap: 23px; white-space: nowrap; }
+.shop-nav-link { color: #64677b; text-decoration: none; font-size: 12px; font-weight: 750; transition: color .2s; }
+.shop-nav-link:hover, .shop-nav-link.is-active { color: #6355e7; }
+.shop-header-search { flex: 1; min-width: 140px; max-width: 310px; margin-left: auto; height: 42px; display: flex; align-items: center; gap: 10px; padding: 0 6px 0 14px; border: 1px solid #ededf5; border-radius: 13px; background: #f7f7fb; color: #8c8da2; }
+.shop-header-search:focus-within { background: white; border-color: #b6aff4; }
+.shop-header-search input { width: 100%; min-width: 0; outline: none; border: 0; background: transparent; font-size: 12px; color: #252641; }
+.shop-header-search input::placeholder { color: #a0a0af; }
+.shop-header-search button { flex-shrink: 0; border: 0; width: 29px; height: 29px; border-radius: 9px; color: white; background: #6255e8; display: grid; place-items: center; }
+.shop-header-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.shop-icon-button, .shop-mobile-menu { position: relative; width: 42px; height: 42px; display: grid; place-items: center; flex-shrink: 0; border: 1px solid #f0eff7; background: #fff; border-radius: 13px; color: #373b58; text-decoration: none; transition: background .2s, color .2s; }
+.shop-icon-button:hover, .shop-icon-button.selected { color: #6255e8; background: #f3f1ff; }
+.shop-count-badge { position: absolute; top: -6px; right: -6px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 0 3px; border-radius: 50%; background: #ff8f76; color: white; font-size: 10px; font-weight: 900; border: 2px solid white; }
+.shop-account-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; max-width: 125px; min-height: 42px; padding: 0 15px; border-radius: 13px; text-decoration: none; white-space: nowrap; color: #fff; background: #6255e8; font-size: 12px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; }
+.shop-account-btn:hover { background: #4e41cf; }
+.shop-account-btn span { overflow: hidden; text-overflow: ellipsis; }
+.shop-mobile-menu { display: none; }
+@media (max-width: 1100px) { .shop-header-inner { gap: 19px; } .shop-nav { gap: 13px; } .shop-header-search { max-width: 215px; } }
+@media (max-width: 900px) { .shop-header-search { display: none; } .shop-nav { margin-left: auto; } .shop-header-actions { margin-left: 0; } }
+@media (max-width: 660px) { .shop-topline-right { display: none !important; } .shop-header-inner { height: 66px; gap: 10px; } .shop-logo { font-size: 20px; } .shop-logo-symbol { width: 36px; height: 36px; } .shop-nav { position: absolute; display: none; left: 0; right: 0; top: 99px; padding: 18px 20px 22px; background: white; border-bottom: 1px solid #ededf6; box-shadow: 0 16px 28px #23234212; } .shop-nav.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 20px; } .shop-header-actions { margin-left: auto; gap: 6px; } .shop-icon-button, .shop-mobile-menu { width: 36px; height: 36px; border-radius: 10px; } .shop-account-btn { min-width: 36px; min-height: 36px; padding: 0 8px; } .shop-account-btn span { display: none; } .shop-mobile-menu { display: grid; } }
+@media (max-width: 390px) { .shop-logo { font-size: 17px; gap: 6px; } .shop-logo-symbol { width: 31px; height: 31px; } .shop-header-actions { gap: 3px; } .shop-icon-button, .shop-mobile-menu, .shop-account-btn { width: 33px; height: 33px; min-height: 33px; } }
+
+/* Compact locale switcher - all languages available, including on mobile. */
+.shop-language-selector { display:inline-flex; flex-shrink:0; align-items:center; padding:4px; gap:2px; border:1px solid #e9e8f6; border-radius:13px; background:#f4f3fb; }
+.shop-language-option { min-width:37px; height:33px; border:0; border-radius:9px; padding:0 6px; font:800 11px/1 system-ui,sans-serif; letter-spacing:.15px; color:#777990; background:transparent; cursor:pointer; transition:all .2s ease; }
+.shop-language-option:hover { color:#4d40d3; background:#e9e5ff; }
+.shop-language-option.active { background:#fff; color:#594bdc; box-shadow:0 2px 9px #34326a1a; }
+.shop-language-option:focus-visible { outline:2px solid #6355e7; outline-offset:2px; }
+@media(max-width:660px) { .shop-language-selector { padding:2px; border-radius:10px; }.shop-language-option { min-width:29px; height:29px; font-size:9px; padding:0 2px; }.shop-header-actions { gap:5px; } }
+@media(max-width:390px) { .shop-language-option { min-width:26px; font-size:8px; }.shop-language-selector { gap:1px; } }
+
+/* Account is the single entry point to favorites and cart. */
+.shop-account-btn { max-width: 210px; padding: 0 17px; }
+@media(max-width:660px) { .shop-account-btn { max-width: none; } .shop-account-btn span { display: none; } }
+
+.shop-nav-search{display:none}
+@media(max-width:660px){.shop-nav-search{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid #eeedf7;border-radius:11px;background:#f8f8fc}.shop-nav-search input{border:0;outline:0;min-width:0;flex:1;background:transparent;font-size:12px}.shop-nav-search button{border:0;background:#6255e8;color:white;display:grid;place-items:center;padding:8px;border-radius:8px}}
+
+/* Translations can be wider than Armenian labels: collapse nav earlier. */
+@media (min-width:661px) and (max-width:860px) {
+  .shop-header-inner { height:66px; }
+  .shop-nav { position:absolute; display:none; left:0; right:0; top:99px; padding:18px 20px 22px; background:white; border-bottom:1px solid #ededf6; box-shadow:0 16px 28px #23234212; }
+  .shop-nav.is-open { display:flex; flex-direction:column; align-items:stretch; gap:20px; }
+  .shop-nav-search { display:flex; align-items:center; gap:9px; padding:8px 10px; border:1px solid #eeedf7; border-radius:11px; background:#f8f8fc; }
+  .shop-nav-search input { border:0; outline:0; min-width:0; flex:1; background:transparent; font-size:12px; }
+  .shop-nav-search button { border:0; background:#6255e8; color:white; display:grid; place-items:center; padding:8px; border-radius:8px; }
+  .shop-header-actions { margin-left:auto; }
+  .shop-mobile-menu { display:grid; }
+}
+
+@media (min-width:901px) and (max-width:1100px) { .shop-header-search { display:none; } .shop-header-actions { margin-left:auto; } }
+
+.shop-lang-full { display:none; }
+.shop-lang-short { display:inline; }
+@media (min-width:1200px) {
+  .shop-lang-full { display:inline; }
+  .shop-lang-short { display:none; }
+  .shop-language-option { padding:0 10px; }
+}
