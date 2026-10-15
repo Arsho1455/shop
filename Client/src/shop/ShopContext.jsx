@@ -64,6 +64,13 @@ export function ShopProvider({ children }) {
     }
   }, [products]);
 
+  const refreshShop = useCallback(async () => {
+    if (!userRef.current) return;
+    const ownerId = userRef.current;
+    const payload = await api('/api/shop');
+    if (userRef.current === ownerId) setState(hydrate(payload, byId));
+  }, [products]);
+
   const addToCart = (product) => mutate(`/api/shop/cart/${Number(product.id)}`, 'POST');
   const setCartQuantity = (id, quantity) => mutate(`/api/shop/cart/${Number(id)}`, 'PATCH', { quantity });
   const removeFromCart = (id) => mutate(`/api/shop/cart/${Number(id)}`, 'DELETE');
@@ -79,7 +86,7 @@ export function ShopProvider({ children }) {
 
   return <ShopContext.Provider value={{
     ...state, loading: loading || authLoading, busy, error,
-    addToCart, setCartQuantity, removeFromCart, clearCart,
+    refreshShop, addToCart, setCartQuantity, removeFromCart, clearCart,
     toggleFavorite, removeFavorite, clearFavorites, isFavorite,
   }}>{children}</ShopContext.Provider>;
 }

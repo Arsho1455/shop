@@ -11,6 +11,7 @@ import authRoutes from "./auth/routes/auth.js";
 import profileRoutes from "./auth/routes/profile.js";
 import shopRoutes from "./auth/routes/shop.js";
 import contactRoutes from "./auth/routes/contact.js";
+import ordersRoutes from './auth/routes/orders.js';
 
 const app = express();
 app.disable('x-powered-by');
@@ -51,6 +52,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/shop', shopRoutes);
+app.use('/api/orders', ordersRoutes);
 app.use('/api/contact', contactRoutes);
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.get('/', (_req, res) => res.send('PhoneShop Server is working!'));

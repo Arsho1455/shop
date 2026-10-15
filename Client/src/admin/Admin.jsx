@@ -15,14 +15,15 @@ const displayDate = (date, lang) => date ? new Date(date).toLocaleDateString(lan
 function Status({ active, text }) { return <span className={`adm-status ${active ? 'ok' : 'wait'}`}><i />{text}</span>; }
 
 function AdminDashboard({ user, onSignedOut }) {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const { refreshCatalog } = useCatalog();
   const w = words[language] || words.hy;
   const { pathname } = useLocation();
-  const section = pathname.endsWith('/products') ? 'products' : pathname.endsWith('/users') ? 'users' : 'overview';
+  const section = pathname.endsWith('/products') ? 'products' : pathname.endsWith('/users') ? 'users' : pathname.endsWith('/orders') ? 'orders' : 'overview';
   const [stats, setStats] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [total, setTotal] = useState(0);
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
@@ -40,11 +41,12 @@ function AdminDashboard({ user, onSignedOut }) {
     if (!user || user.role !== 'admin') return;
     let live = true;
     setLoading(true); setError('');
-    const endpoint = section === 'overview' ? '/api/admin/stats' : section === 'products' ? '/api/admin/products' : `/api/admin/users?page=${page}&q=${encodeURIComponent(submittedSearch)}`;
+    const endpoint = section === 'overview' ? '/api/admin/stats' : section === 'products' ? '/api/admin/products' : section === 'orders' ? `/api/admin/orders?page=${page}` : `/api/admin/users?page=${page}&q=${encodeURIComponent(submittedSearch)}`;
     api(endpoint)
       .then((data) => { if (!live) return;
         if (section === 'overview') setStats(data);
         if (section === 'products') setProducts(data.products || []);
+        if (section === 'orders') { setOrders(data.orders || []); setTotal(data.count); setPages(data.pages); }
         if (section === 'users') { setUsers(data.users || []); setTotal(data.total); setPages(data.pages); }
       })
       .catch((e) => { if (live) setError(e.message); })
@@ -92,7 +94,7 @@ function AdminDashboard({ user, onSignedOut }) {
       <Link to="/admin" className="adm-brand"><span className="adm-brand-badge"><ShopIcon name="bolt" fill="white" size={21}/></span><span>phone<span>shop</span><small>MANAGEMENT</small></span></Link>
       <div className="adm-nav-label">{w.adminZone}</div>
       <nav className="adm-nav" aria-label={w.panel}>
-        {[['overview', '/admin', 'filter', w.overview], ['products', '/admin/products', 'bag', w.products], ['users', '/admin/users', 'user', w.users]].map(([key, href, icon, name]) =>
+        {[['overview', '/admin', 'filter', w.overview], ['products', '/admin/products', 'bag', w.products], ['users', '/admin/users', 'user', w.users], ['orders', '/admin/orders', 'bag', t('Իմ պատվերները')]].map(([key, href, icon, name]) =>
           <Link key={key} to={href} className={`adm-nav-item ${section === key ? 'selected' : ''}`}><ShopIcon name={icon} size={19}/>{name}{section === key && <span className="adm-nav-active-dot" />}</Link>)}
       </nav>
       <div className="adm-sidebar-bottom"><Link to="/" className="adm-nav-item"><ShopIcon name="arrowLeft" size={19}/>{w.storefront}</Link>
@@ -101,7 +103,7 @@ function AdminDashboard({ user, onSignedOut }) {
       <div className="adm-side-user"><span className="adm-avatar">{user.name?.slice(0, 1)?.toUpperCase() || 'A'}</span><span><b>{user.name}</b><small>{user.email}</small></span><ShopIcon name="shield" size={17}/></div>
     </aside>
     <div className="adm-body">
-      <header className="adm-topbar"><div className="adm-breadcrumb"><span>PhoneShop</span><ShopIcon name="arrowRight" size={15}/><strong>{section === 'overview' ? w.overview : section === 'products' ? w.products : w.users}</strong></div>
+      <header className="adm-topbar"><div className="adm-breadcrumb"><span>PhoneShop</span><ShopIcon name="arrowRight" size={15}/><strong>{section === 'overview' ? w.overview : section === 'products' ? w.products : section === 'orders' ? t('Իմ պատվերները') : w.users}</strong></div>
         <div className="adm-topbar-actions"><div className="adm-languages">{[['hy', 'ՀԱՅ'],['ru','РУС'],['en','ENG']].map(([code,label]) => <button type="button" key={code} aria-pressed={language === code} onClick={() => setLanguage(code)}>{label}</button>)}</div><span className="adm-top-avatar">{user.name?.slice(0, 1)?.toUpperCase()}</span></div>
       </header>
       <main className="adm-content">
@@ -116,9 +118,10 @@ function AdminDashboard({ user, onSignedOut }) {
               <section className="adm-inventory-card"><span className="adm-inventory-orb"><ShopIcon name="shield" size={26}/></span><span className="adm-eyebrow">STORE HEALTH</span><h2>{w.attention}</h2><div className="adm-stock-number">{stats.lowStock}<small> / {stats.products}</small></div><div className="adm-track"><span style={{width: `${stats.products ? 100 * (stats.products - stats.lowStock) / stats.products : 100}%`}} /></div><p>{stats.lowStock ? `${stats.lowStock} ${w.lowStockMessage}` : w.allStocked}</p><Link to="/admin/products">{w.manageProducts}<ShopIcon name="arrowRight" size={18}/></Link></section>
             </div>
           </>}
-          <p className="adm-muted-tip">{w.noOrders}</p>
+          <p className="adm-muted-tip"><Link to="/admin/orders">{t('Դիտել պատվերները')} →</Link></p>
         </>}
         {section === 'products' && <><div className="adm-page-intro"><div><span className="adm-eyebrow">CATALOG / 02</span><h1>{w.products}</h1><p>{w.productsDesc}</p></div><button onClick={openNew} className="adm-primary"><ShopIcon name="plus" size={18}/>{w.addProduct}</button></div><div className="adm-card adm-data-card"><div className="adm-data-toolbar"><div className="adm-search"><ShopIcon name="search" size={19}/><input aria-label={w.productsSearch} value={search} onChange={e=>setSearch(e.target.value)} placeholder={w.productsSearch}/></div><span className="adm-row-counter">{filteredProducts.length} {w.products.toLowerCase()}</span></div>{loading ? <div className="adm-loading-slim">{w.loading}</div> : <div className="adm-table-wrap"><table className="adm-table adm-product-table"><thead><tr><th>{w.title}</th><th>{w.price}</th><th>{w.stock}</th><th>{w.actions}</th></tr></thead><tbody>{filteredProducts.map((p)=><tr key={p.id}><td><div className="adm-product"><span className="adm-product-photo"><img src={p.image} alt="" /></span><div><b>{p.name}</b><small>{p.brand} · {p.storage}</small></div></div></td><td><b>{formatPrice(p.price)}</b></td><td><Status active={p.stock > 5} text={String(p.stock)}/></td><td><div className="adm-row-actions"><button disabled={busy} onClick={()=>openEdit(p)}>{w.edit}</button><button className="danger" disabled={busy} onClick={()=>removeProduct(p)}>{w.remove}</button></div></td></tr>)}{filteredProducts.length===0 && <tr><td colSpan="4" className="adm-empty-cell">{w.noProducts}</td></tr>}</tbody></table></div>}</div></>}
+        {section === 'orders' && <><div className="adm-page-intro"><div><span className="adm-eyebrow">ORDERS / 04</span><h1>{t('Իմ պատվերները')}</h1><p>{t('Հաճախորդների դեմո պատվերները։ Դրանք իրական վճարումներ չեն։')}</p></div><span className="adm-user-count">{total}</span></div><div className="adm-card adm-data-card">{loading ? <div className="adm-loading-slim">{w.loading}</div> : <div className="adm-table-wrap"><table className="adm-table"><thead><tr><th>{t('Պատվերի համար')}</th><th>{t('Հաճախորդ')}</th><th>{t('Առաքման հասցե')}</th><th>{t('Գումար')}</th><th>{t('Վիճակ')}</th></tr></thead><tbody>{orders.map(order => <tr key={order.id}><td><b>{order.orderNumber}</b><small style={{display:'block'}}>{displayDate(order.createdAt, language)}</small></td><td><b>{order.shipping.fullName}</b><small style={{display:'block'}}>{order.email}</small><small>{order.shipping.phone}</small></td><td>{order.shipping.city}, {order.shipping.street}{order.shipping.apartment ? `, ${order.shipping.apartment}` : ''}</td><td><b>{formatPrice(order.total)}</b></td><td><Status active={['paid', 'demo_completed'].includes(order.status)} text={t(order.status === 'demo_completed' ? 'Դեմո պատվեր' : order.status === 'paid' ? 'Վճարված' : order.status === 'refunded' ? 'Վերադարձված' : order.status === 'failed' ? 'Չվճարված' : 'Սպասման մեջ')} />{order.inventoryIssue && <small style={{display:'block',color:'#c35c57'}}>{t('Ստուգել պահեստի մնացորդը')}</small>}</td></tr>)}{!orders.length && <tr><td colSpan="5" className="adm-empty-cell">{t('Դեռ պատվերներ չկան')}</td></tr>}</tbody></table></div>}<div className="adm-pagination"><span>{w.page} {page} {w.of} {pages}</span><div><button disabled={page === 1} onClick={()=>setPage(x=>x-1)}>{w.prev}</button><button disabled={page === pages} onClick={()=>setPage(x=>x+1)}>{w.next}</button></div></div></div></>}
         {section === 'users' && <><div className="adm-page-intro"><div><span className="adm-eyebrow">PEOPLE / 03</span><h1>{w.users}</h1><p>{w.usersDesc}</p></div><span className="adm-user-count">{total} {w.users.toLowerCase()}</span></div><div className="adm-card adm-data-card"><form className="adm-data-toolbar" onSubmit={e=>{e.preventDefault();setPage(1);setSubmittedSearch(search);}}><div className="adm-search"><ShopIcon name="search" size={19}/><input aria-label={w.usersSearch} value={search} onChange={e=>setSearch(e.target.value)} placeholder={w.usersSearch}/></div><button className="adm-outline" type="submit">{w.search}</button></form>{loading ? <div className="adm-loading-slim">{w.loading}</div> : <div className="adm-table-wrap"><table className="adm-table"><thead><tr><th>{w.user}</th><th>{w.role}</th><th>{w.status}</th><th>{w.favorites} / {w.cart}</th><th>{w.joined}</th></tr></thead><tbody>{users.map((person)=><tr key={person.id}><td><div className="adm-person"><span className="adm-mini-avatar">{person.name?.slice(0,1)?.toUpperCase()}</span><span><b>{person.name}</b><small>{person.email}</small></span></div></td><td><span className={`adm-role ${person.role === 'admin' ? 'staff' : ''}`}>{person.role === 'admin' ? w.admin : w.customer}</span></td><td><Status active={person.verified} text={person.verified ? w.verifiedYes : w.verifiedNo}/></td><td>{person.favorites} ♡ &nbsp; {person.cartItems} ⛶</td><td>{displayDate(person.createdAt,language)}</td></tr>)}{users.length===0 && <tr><td colSpan="5" className="adm-empty-cell">{w.noUsers}</td></tr>}</tbody></table></div>}<div className="adm-pagination"><span>{w.page} {page} {w.of} {pages}</span><div><button disabled={page===1} onClick={()=>setPage(x=>x-1)}>{w.prev}</button><button disabled={page===pages} onClick={()=>setPage(x=>x+1)}>{w.next}</button></div></div></div></>}
         {notice && <div className="adm-alert success" role="status">✓ {notice}</div>}
         {error && <div className="adm-alert error" role="alert">{error} <button onClick={() => { setError(''); window.location.reload(); }}>{w.retry}</button></div>}

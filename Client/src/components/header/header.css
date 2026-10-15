@@ -67,3 +67,6 @@
   .shop-lang-short { display:none; }
   .shop-language-option { padding:0 10px; }
 }
+
+/* Cart is always accessible, including on small screens. */
+.shop-header-cart{border-color:#e8e4ff;color:#6355e7;background:#f8f7ff}.shop-header-cart:hover{background:#efebff}.shop-count-badge{box-shadow:0 2px 6px #ec857b55}.shop-header-actions{flex-shrink:0}@media(max-width:500px){.shop-header-inner{gap:6px}.shop-account-btn{min-width:32px}.shop-header-cart{width:37px;height:37px}.shop-logo{letter-spacing:-1.3px}.shop-language-option{min-width:26px}}

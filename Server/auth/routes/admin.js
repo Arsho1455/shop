@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { User } from '../models/User.js';
 import { AdminAccount } from '../models/AdminAccount.js';
 import { Product } from '../../models/productModel.js';
+import { Order, publicOrder } from '../models/Order.js';
 import { requireAdminSession } from '../middleware/requireAdminSession.js';
 import { listCatalog, nextProductId, validateProduct } from '../data/catalogService.js';
 import { parseProductId } from '../utils/shop.js';
@@ -33,6 +34,15 @@ router.get('/users', async (req, res) => {
   ]);
   res.json({ users: users.map((u) => ({ id: String(u._id), name: u.name, email: u.email, role: 'customer', verified: u.isEmailVerified,
     favorites: u.favorites?.length || 0, cartItems: (u.cart || []).reduce((sum, item) => sum + (item.quantity || 0), 0), createdAt: u.createdAt })), total, page, pages: Math.max(1, Math.ceil(total / 15)) });
+});
+
+router.get('/orders', async (req, res) => {
+  const page = Math.min(10000, Math.max(1, Number.parseInt(req.query.page, 10) || 1));
+  const [count, rows] = await Promise.all([
+    Order.countDocuments(),
+    Order.find().sort({ createdAt: -1 }).skip((page - 1) * 20).limit(20).lean(),
+  ]);
+  return res.json({ orders: rows.map((order) => ({ ...publicOrder(order), email: order.email })), page, pages: Math.max(1, Math.ceil(count / 20)), count });
 });
 
 router.get('/products', async (_req, res) => res.json({ products: await listCatalog() }));

@@ -2,12 +2,15 @@ import { useLanguage } from '../../i18n/LanguageContext.jsx';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth/context/AuthContext.jsx';
+import { useShop } from '../../shop/ShopContext.jsx';
 import ShopIcon from '../../shop/ShopIcon.jsx';
 import './header.css';
 
 export const MyHeader = () => {
   const { t, language, setLanguage } = useLanguage();
   const { user } = useAuth();
+  const { cart } = useShop();
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
   const location = useLocation();
@@ -67,6 +70,7 @@ export const MyHeader = () => {
                   onClick={() => setLanguage(code)}><span className="shop-lang-full">{label}</span><span className="shop-lang-short">{short}</span></button>
               ))}
             </div>
+            <Link to={user ? '/profile/cart' : '/auth?mode=login&next=%2Fprofile%2Fcart'} className={`shop-icon-button shop-header-cart ${location.pathname.includes('/cart') || location.pathname.includes('/checkout') ? 'selected' : ''}`} title={t('Իմ զամբյուղը')} aria-label={`${t('Իմ զամբյուղը')}: ${cartCount}`}><ShopIcon name="bag" size={20} />{cartCount > 0 && <span className="shop-count-badge">{cartCount > 99 ? '99+' : cartCount}</span>}</Link>
             {user?.role === 'admin' && <Link to="/admin" className="shop-account-btn" title={t('Ադմինիստրատոր')}>⚙ <span>{t('Ադմինիստրատոր')}</span></Link>}
             <Link to={user ? '/profile' : '/auth?mode=login'} className="shop-account-btn" aria-label={user ? t("Իմ էջը") : t("Մուտք / Գրանցում")}>
               <ShopIcon name="user" size={20} />

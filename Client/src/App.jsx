@@ -13,6 +13,8 @@ import Profile from './auth/pages/Profile.jsx';
 import VerifyEmail from './auth/pages/VerifyEmail.jsx';
 import ForgotPassword from './auth/pages/ForgotPassword.jsx';
 import ResetPassword from './auth/pages/ResetPassword.jsx';
+import Checkout from './checkout/Checkout.jsx';
+import OrderResult from './checkout/OrderResult.jsx';
 import './auth/auth.css';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 
@@ -40,6 +42,9 @@ function SiteRoutes() {
       <Route path="/profile" element={<AuthPage><Profile /></AuthPage>} />
       <Route path="/profile/favorites" element={<AuthPage><Profile section="favorites" /></AuthPage>} />
       <Route path="/profile/cart" element={<AuthPage><Profile section="cart" /></AuthPage>} />
+      <Route path="/profile/orders" element={<AuthPage><Profile section="orders" /></AuthPage>} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout/result" element={<OrderResult />} />
       <Route path="/favorites" element={<Navigate to="/profile/favorites" replace />} />
       <Route path="/cart" element={<Navigate to="/profile/cart" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />

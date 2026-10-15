@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node --test auth/utils/*.test.js auth/data/*.test.js auth/middleware/*.test.js scripts/*.test.mjs",
+    "test": "node --test auth/utils/*.test.js auth/payments/*.test.js auth/data/*.test.js auth/middleware/*.test.js scripts/*.test.mjs",
     "dev": "nodemon start.js",
     "start": "node start.js",
     "admin:create": "node scripts/createAdmin.mjs",
