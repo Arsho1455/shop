@@ -1,10 +1,24 @@
 import mongoose from 'mongoose';
 import { Product } from '../../models/productModel.js';
+import { Review } from '../models/Review.js';
 import { defaultProducts } from './defaultProducts.js';
 export { validateProduct } from './productValidation.js';
 
 const PUBLIC_FIELDS = 'id name brand price oldPrice stock image storage color rating reviews description tag tone';
-export const listCatalog = () => Product.find({ id: { $exists: true } }).select(PUBLIC_FIELDS).sort({ id: 1 }).lean();
+// Live ratings come from user-submitted reviews, never from demo seed numbers.
+export async function reviewStats(productIds) {
+  if (!productIds.length) return new Map();
+  const rows = await Review.aggregate([
+    { $match: { productId: { $in: productIds } } },
+    { $group: { _id: '$productId', count: { $sum: 1 }, average: { $avg: '$rating' } } },
+  ]);
+  return new Map(rows.map((row) => [row._id, { reviews: row.count, rating: Math.round(row.average * 10) / 10 }]));
+}
+export async function listCatalog() {
+  const products = await Product.find({ id: { $exists: true } }).select(PUBLIC_FIELDS).sort({ id: 1 }).lean();
+  const stats = await reviewStats(products.map((item) => item.id));
+  return products.map((item) => ({ ...item, ...(stats.get(item.id) || { rating: 0, reviews: 0 }) }));
+}
 
 // Insert starter entries once, never repopulate products removed by an administrator.
 export async function initializeCatalog() {

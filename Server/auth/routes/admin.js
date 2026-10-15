@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { User } from '../models/User.js';
 import { AdminAccount } from '../models/AdminAccount.js';
 import { Product } from '../../models/productModel.js';
+import { Review } from '../models/Review.js';
 import { Order, publicOrder } from '../models/Order.js';
 import { requireAdminSession } from '../middleware/requireAdminSession.js';
 import { listCatalog, nextProductId, validateProduct } from '../data/catalogService.js';
@@ -69,7 +70,10 @@ router.delete('/products/:id', async (req, res) => {
   const removed = await Product.deleteOne({ id });
   if (!removed.deletedCount) return res.status(404).json({ message: 'Ապրանքը չի գտնվել։' });
   // Remove deleted item from personal lists to prevent stale references.
-  await User.updateMany({}, { $pull: { favorites: id, cart: { productId: id } } });
+  await Promise.all([
+    User.updateMany({}, { $pull: { favorites: id, cart: { productId: id } } }),
+    Review.deleteMany({ productId: id }),
+  ]);
   res.json({ message: 'Ապրանքը հեռացվել է։' });
 });
 

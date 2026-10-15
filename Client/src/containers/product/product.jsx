@@ -7,6 +7,7 @@ import { useShop } from '../../shop/ShopContext.jsx';
 import { useLoginGate } from '../../shop/useLoginGate.js';
 import ShopIcon from '../../shop/ShopIcon.jsx';
 import './product.css';
+import { ProductReviews } from './ProductReviews.jsx';
 
 export const ProductPage = () => {
   const { t, language } = useLanguage();
@@ -42,7 +43,7 @@ export const ProductPage = () => {
       <section className="shop-product-body">
         <span className="shop-eyebrow">{product.brand.toUpperCase()} · {product.storage}</span>
         <h1>{product.name}</h1>
-        <div className="shop-product-rating"><ShopIcon name="star" size={16} fill="#ffb95d"/><b>{product.rating}</b><span>· {product.reviews} {countLabel(product.reviews, language, "reviews")}</span></div>
+        <a href="#reviews" className="shop-product-rating"><ShopIcon name="star" size={16} fill={product.reviews ? '#ffb95d' : 'none'}/><b>{product.reviews ? product.rating : t('Դեռ գնահատական չկա')}</b><span>· {product.reviews} {countLabel(product.reviews, language, "reviews")}</span></a>
         <p className="shop-product-description">{t(product.description)}</p>
         <div className="shop-product-prices"><strong>{formatPrice(product.price)}</strong>{product.oldPrice > product.price && <del>{formatPrice(product.oldPrice)}</del>}<span>{t("Հատուկ գին")}</span></div>
         <div className="shop-product-availability"><span className="shop-product-stock-dot"/>{t("Առկա է ·")} {product.stock} {t("հատ")}</div>
@@ -54,6 +55,7 @@ export const ProductPage = () => {
         <div className="shop-product-specs"><div><span>{t("Բրենդ")}</span><strong>{product.brand}</strong></div><div><span>{t("Հիշողություն")}</span><strong>{product.storage}</strong></div><div><span>{t("Գույն")}</span><strong>{t(product.color)}</strong></div><div><span>{t("Վիճակ")}</span><strong>{t("Նոր")}</strong></div></div>
       </section>
     </div>
+    <ProductReviews key={product.id} product={product}/>
     <Link to="/#products" className="shop-product-back"><ShopIcon name="arrowLeft" size={18}/> {t("Տեսնել մյուս ապրանքները")}</Link>
     {message && <div className="ph-toast" role="status"><ShopIcon name="check" size={18}/>{t(message)}<button type="button" onClick={() => setMessage('')} aria-label={t("Փակել")}><ShopIcon name="close" size={16}/></button></div>}
   </main>;
