@@ -17,7 +17,7 @@ export function countLabel(number, language, kind = 'products') {
 function savedLanguage() {
   try {
     // Verification links can carry a safe locale hint (no credentials in query string).
-    const fromLink = window.location.pathname === '/verify-email' ? new URLSearchParams(window.location.search).get('lang') : null;
+    const fromLink = ['/verify-email', '/reset-password'].includes(window.location.pathname) ? new URLSearchParams(window.location.search).get('lang') : null;
     if (SUPPORTED_LANGUAGES.includes(fromLink)) return fromLink;
     const value = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
     return SUPPORTED_LANGUAGES.includes(value) ? value : 'hy';

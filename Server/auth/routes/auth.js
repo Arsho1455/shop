@@ -3,10 +3,10 @@ import { rateLimit } from 'express-rate-limit';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import { User } from '../models/User.js';
-import { sendVerificationEmail } from '../utils/mail.js';
+import { sendPasswordResetEmail, sendVerificationEmail } from '../utils/mail.js';
 import {
-  clearSessionCookie, createEmailToken, createSessionToken,
-  COOKIE_NAME, hashTokenId, publicUser, setSessionCookie, verifyEmailToken, verifySessionToken,
+  clearSessionCookie, createEmailToken, createPasswordResetToken, createSessionToken,
+  COOKIE_NAME, hashPasswordResetToken, hashTokenId, publicUser, setSessionCookie, verifyEmailToken, verifySessionToken,
 } from '../utils/auth.js';
 import { normalizeEmail, validEmail, validName, validPassword } from '../utils/validate.js';
 
@@ -22,6 +22,8 @@ const signUpLimiter = limiter(10);
 const loginLimiter = limiter(15);
 const resendLimiter = limiter(5, 60 * 60 * 1000);
 const verifyLimiter = limiter(20);
+const forgotPasswordLimiter = limiter(5, 60 * 60 * 1000);
+const resetPasswordLimiter = limiter(10, 60 * 60 * 1000);
 
 async function generateAndSendVerification(user, language = 'hy') {
   const { token, hash, expiresAt } = createEmailToken(user._id);
@@ -123,8 +125,58 @@ router.post('/login', loginLimiter, async (req, res) => {
       message: 'Սկզբում հաստատիր էլ. հասցեդ։ Կարող ես կրկին ուղարկել նամակը։',
     });
   }
-  setSessionCookie(res, createSessionToken(user._id));
+  setSessionCookie(res, createSessionToken(user._id, user.sessionVersion ?? 0));
   return res.json({ message: 'Մուտքը հաջողվել է։', user: publicUser(user) });
+});
+
+// Do not reveal whether an email is registered. Sending errors are logged internally
+// and the public response is intentionally identical for known/unknown emails.
+router.post('/forgot-password', forgotPasswordLimiter, async (req, res) => {
+  const email = normalizeEmail(req.body?.email);
+  if (!validEmail(email)) return res.status(400).json({ message: 'Մուտքագրիր վավեր էլ. հասցե։' });
+
+  const user = await User.findOne({ email, isEmailVerified: true });
+  if (user) {
+    try {
+      const { token, hash, expiresAt } = createPasswordResetToken();
+      await User.updateOne({ _id: user._id }, {
+        $set: { resetPasswordTokenHash: hash, resetPasswordTokenExpiresAt: expiresAt },
+      });
+      await sendPasswordResetEmail(user.email, token, req.body?.language);
+    } catch (error) {
+      console.error('Password reset email failed:', error.message);
+    }
+  }
+  return res.json({ message: 'Եթե տվյալ էլ. հասցեով հաստատված հաշիվ կա, վերականգնման հղումը կուղարկվի այդ հասցեին։ Ստուգիր նաև Spam պանակը։' });
+});
+
+router.post('/reset-password', resetPasswordLimiter, async (req, res) => {
+  const { token, password } = req.body ?? {};
+  if (typeof token !== 'string' || !/^[a-f0-9]{64}$/.test(token)) {
+    return res.status(400).json({ message: 'Վերականգնման հղումն անվավեր է։' });
+  }
+  if (!validPassword(password)) {
+    return res.status(400).json({ message: 'Նոր գաղտնաբառը պետք է ունենա առնվազն 8 նիշ (առավելագույնը՝ 72 բայթ)։' });
+  }
+
+  const passwordHash = await bcrypt.hash(password, 12);
+  // Atomic update makes the link single-use even when requests race.
+  const user = await User.findOneAndUpdate(
+    {
+      resetPasswordTokenHash: hashPasswordResetToken(token),
+      resetPasswordTokenExpiresAt: { $gt: new Date() },
+      isEmailVerified: true,
+    },
+    {
+      $set: { passwordHash },
+      $unset: { resetPasswordTokenHash: '', resetPasswordTokenExpiresAt: '' },
+      $inc: { sessionVersion: 1 },
+    },
+    { new: true }
+  );
+  if (!user) return res.status(400).json({ message: 'Հղումն անվավեր է, ժամկետանց կամ արդեն օգտագործված։ Պահանջիր նոր հղում։' });
+  clearSessionCookie(res);
+  return res.json({ message: 'Գաղտնաբառը հաջողությամբ փոխվել է։ Այժմ մուտք գործիր նոր գաղտնաբառով։' });
 });
 
 // /me is a session-status endpoint, not a protected resource.
@@ -150,7 +202,7 @@ router.get('/me', async (req, res) => {
 
   // Database errors are not "logged out": let Express's error handler report them.
   const user = await User.findById(payload.sub);
-  if (!user || !user.isEmailVerified) {
+  if (!user || !user.isEmailVerified || (payload.sessionVersion ?? 0) !== (user.sessionVersion ?? 0)) {
     clearSessionCookie(res);
     return res.json({ user: null, authenticated: false });
   }

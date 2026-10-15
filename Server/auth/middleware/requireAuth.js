@@ -6,9 +6,9 @@ export async function requireAuth(req, res, next) {
   if (!token) return res.status(401).json({ message: 'Մուտք գործիր՝ շարունակելու համար։' });
 
   try {
-    const { sub } = verifySessionToken(token);
+    const { sub, sessionVersion = 0 } = verifySessionToken(token);
     const user = await User.findById(sub);
-    if (!user || !user.isEmailVerified) {
+    if (!user || !user.isEmailVerified || sessionVersion !== (user.sessionVersion ?? 0)) {
       return res.status(401).json({ message: 'Սեսիան անվավեր է։' });
     }
     req.user = user;

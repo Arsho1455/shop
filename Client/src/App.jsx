@@ -11,6 +11,8 @@ import Admin from './admin/Admin.jsx';
 import Auth from './auth/pages/Auth.jsx';
 import Profile from './auth/pages/Profile.jsx';
 import VerifyEmail from './auth/pages/VerifyEmail.jsx';
+import ForgotPassword from './auth/pages/ForgotPassword.jsx';
+import ResetPassword from './auth/pages/ResetPassword.jsx';
 import './auth/auth.css';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 
@@ -33,6 +35,8 @@ function SiteRoutes() {
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/auth" element={<AuthPage><Auth /></AuthPage>} />
       <Route path="/verify-email" element={<AuthPage><VerifyEmail /></AuthPage>} />
+      <Route path="/forgot-password" element={<AuthPage><ForgotPassword /></AuthPage>} />
+      <Route path="/reset-password" element={<AuthPage><ResetPassword /></AuthPage>} />
       <Route path="/profile" element={<AuthPage><Profile /></AuthPage>} />
       <Route path="/profile/favorites" element={<AuthPage><Profile section="favorites" /></AuthPage>} />
       <Route path="/profile/cart" element={<AuthPage><Profile section="cart" /></AuthPage>} />

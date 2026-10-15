@@ -90,3 +90,54 @@ export async function sendContactEmail({ name, email, message }) {
       </div>`,
   });
 }
+
+
+const resetCopy = {
+  hy: {
+    subject: 'Վերականգնիր գաղտնաբառը • PhoneShop',
+    title: 'Գաղտնաբառի վերականգնում',
+    intro: 'Սեղմիր կոճակը՝ նոր գաղտնաբառ սահմանելու համար։ Հղումն աշխատում է 1 ժամ և միայն մեկ անգամ։',
+    button: 'Սահմանել նոր գաղտնաբառ →',
+    ignore: 'Եթե սա դու չես պահանջել, անտեսիր նամակը․ գաղտնաբառդ չի փոխվի։',
+  },
+  ru: {
+    subject: 'Восстановление пароля • PhoneShop',
+    title: 'Восстановление пароля',
+    intro: 'Нажми кнопку, чтобы установить новый пароль. Ссылка действует 1 час и только один раз.',
+    button: 'Создать новый пароль →',
+    ignore: 'Если ты не запрашивал смену пароля, просто проигнорируй письмо.',
+  },
+  en: {
+    subject: 'Reset your password • PhoneShop',
+    title: 'Reset your password',
+    intro: 'Click the button to choose a new password. This one-time link expires in 1 hour.',
+    button: 'Set a new password →',
+    ignore: 'If you did not request this, ignore the email. Your password will not change.',
+  },
+};
+
+export async function sendPasswordResetEmail(email, token, language = 'hy') {
+  if (!config.smtpUser || !config.smtpPass) {
+    throw new Error('SMTP credentials are not configured in Server/.env');
+  }
+  const lang = Object.hasOwn(resetCopy, language) ? language : 'hy';
+  const copy = resetCopy[lang];
+  // Fragment data is not sent to the frontend server by the browser.
+  const resetUrl = `${config.frontendUrl}/reset-password?lang=${lang}#token=${token}`;
+  await transporter.sendMail({
+    from: config.smtpFrom,
+    to: email,
+    subject: copy.subject,
+    text: `${copy.title}\n\n${copy.intro}\n\n${resetUrl}\n\n${copy.ignore}`,
+    html: `
+      <div lang="${lang}" style="background:#090e1b;padding:42px 20px;font-family:Arial,sans-serif;color:#ecf1ff">
+        <div style="max-width:490px;margin:auto;padding:36px;border:1px solid #303a55;border-radius:22px;background:#121a2c">
+          <div style="font-size:22px;font-weight:800;margin-bottom:24px">✦ PhoneShop</div>
+          <h1 style="font-size:26px;line-height:1.3">${copy.title}</h1>
+          <p style="color:#aebbd3;line-height:1.7">${copy.intro}</p>
+          <a href="${resetUrl}" style="display:inline-block;background:#8365f5;color:white;padding:14px 24px;border-radius:12px;text-decoration:none;font-weight:bold;margin:16px 0">${copy.button}</a>
+          <p style="color:#8491aa;font-size:12px;line-height:1.6">${copy.ignore}</p>
+        </div>
+      </div>`,
+  });
+}

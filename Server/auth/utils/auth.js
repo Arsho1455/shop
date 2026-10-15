@@ -1,4 +1,4 @@
-import { createHash, randomUUID } from 'node:crypto';
+import { createHash, randomBytes, randomUUID } from 'node:crypto';
 import jwt from 'jsonwebtoken';
 import { config } from '../config.js';
 
@@ -6,8 +6,8 @@ const ISSUER = 'armauth-api';
 const COOKIE_NAME = 'armauth_session';
 const SESSION_DAYS = 7;
 
-export function createSessionToken(userId) {
-  return jwt.sign({ purpose: 'session' }, config.jwtSecret, {
+export function createSessionToken(userId, sessionVersion = 0) {
+  return jwt.sign({ purpose: 'session', sessionVersion }, config.jwtSecret, {
     subject: String(userId),
     issuer: ISSUER,
     audience: 'armauth-client',
@@ -45,6 +45,16 @@ export function verifyEmailToken(token) {
     throw new Error('Invalid email token');
   }
   return payload;
+}
+
+// Random one-time reset secret: only its SHA-256 digest is stored in MongoDB.
+export function createPasswordResetToken() {
+  const token = randomBytes(32).toString('hex');
+  return { token, hash: hashPasswordResetToken(token), expiresAt: new Date(Date.now() + 60 * 60 * 1000) };
+}
+
+export function hashPasswordResetToken(token) {
+  return createHash('sha256').update(token).digest('hex');
 }
 
 export function hashTokenId(jti) {

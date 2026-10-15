@@ -203,3 +203,13 @@ npm run admin:password -- gabrielyanarsho3@gmail.com
 Դրանց փոխարեն օգտագործիր `admin:create` և `admin:password`։
 
 Այս նախագիծը իրական վճարումներ և պատվերի հաստատում դեռ չի կատարում։
+
+## Գաղտնաբառի վերականգնում (նոր)
+
+- Մուտքի էջից «Մոռացե՞լ ես գաղտնաբառը» → `/forgot-password`։
+- `POST /api/auth/forgot-password`՝ email + language։ Հաստատված հաշիվներին ուղարկվում է 1 ժամ գործողությամբ, մեկանգամյա հղում։ Անհայտ email-ների դեպքում պատասխանը նույնն է, որպեսզի հաշիվները չբացահայտվեն։
+- Նամակի հղումը `/reset-password?lang=hy#token=...` ձևաչափով է։ Գաղտնի token-ը պահվում է միայն SHA-256 հեշով DB-ում։
+- `POST /api/auth/reset-password`՝ token + password։ Նոր գաղտնաբառը պահպանվում է bcrypt հեշով, token-ը ոչնչացվում է, բոլոր նախկին օգտատիրական սեսիաներն անվավեր են դառնում։
+- Անհրաժեշտ են **աշխատող MongoDB, SMTP_USER/SMTP_PASS և FRONTEND_URL**։ Տեղային և Vercel միջավայրերում կարգավորիր նույն env փոփոխականները։
+- Backend-ում rate limiting-ը կանխում է զանգվածային հարցումները։ Վերականգնումը վերաբերում է **հաճախորդի հաշիվներին**, ոչ թե admin account-ին (admin-ի համար արդեն կա `npm run admin:password`)։
+- Անվտանգության համար այս ZIP-ում չկան `.env`, `.git` և `node_modules` պանակները։ Նախկին `Server/.env`-ը պահիր առանձին, օգտագործիր `Server/.env.example` որպես օրինակ։

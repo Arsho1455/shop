@@ -243,3 +243,10 @@
 .shop-auth .profile-form-footer{flex-direction:column;align-items:stretch}
 .shop-auth .profile-form-footer .btn{width:100%}
 .shop-auth .site-footer{font-size:9px}}
+/* Password recovery screens share the existing PhoneShop authentication design. */
+.shop-auth .forgot-link-row{display:flex;justify-content:flex-end;margin-top:-4px;margin-bottom:4px}
+.shop-auth .forgot-link-row .text-button{font-size:13px;text-decoration:none}
+.shop-auth .forgot-link-row .text-button:hover{text-decoration:underline}
+.shop-auth .password-reset-page .simple-card{width:100%;max-width:470px}
+.shop-auth .password-reset-page .auth-form{text-align:left;margin-top:20px}
+.shop-auth .password-reset-page .back-button{display:inline-flex;align-items:center;gap:8px;margin-top:20px}
