@@ -17,6 +17,7 @@ import Checkout from './checkout/Checkout.jsx';
 import OrderResult from './checkout/OrderResult.jsx';
 import './auth/auth.css';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
+import SiteExperience from './experience/SiteExperience.jsx';
 
 const AuthPage = ({ children }) => <div className="shop-auth">{children}</div>;
 
@@ -29,8 +30,8 @@ export default function App() {
 function SiteRoutes() {
   const { pathname } = useLocation();
   // Separate layout: no shop header/footer on admin URLs.
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) return <Admin />;
-  return <><MyHeader />
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) return <SiteExperience><Admin /></SiteExperience>;
+  return <SiteExperience><MyHeader />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/product/:id" element={<ProductPage />} />
@@ -49,5 +50,5 @@ function SiteRoutes() {
       <Route path="/cart" element={<Navigate to="/profile/cart" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
-    <MyFooter /></>;
+    <MyFooter /></SiteExperience>;
 }

@@ -77,7 +77,8 @@ export default function AdminLogin({ onSignedIn }) {
           </ul>
         </div>
         <span className="adm-login-story-foot">© PhoneShop <span className="adm-login-story-asterisk">✦</span> CONTROL CENTER</span>
-        <span className="adm-login-orb orb-one"/><span className="adm-login-orb orb-two"/>
+        <div className="adm-login-device-scene" aria-hidden="true"><span className="adm-login-device-ring"/><div className="adm-login-device"><span className="adm-login-device-camera"/><div className="adm-login-device-display"><ShopIcon name="shield" size={54}/><span/><span/><span/></div></div><span className="adm-login-device-satellite"><ShopIcon name="check" size={25}/></span></div>
+        <span className="adm-login-orb orb-one" aria-hidden="true"/><span className="adm-login-orb orb-two" aria-hidden="true"/>
       </section>
       <section className="adm-login-form-panel">
         <div className="adm-login-languages" aria-label="Language">

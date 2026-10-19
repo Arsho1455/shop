@@ -2,6 +2,7 @@ import { useLanguage } from '../../i18n/LanguageContext.jsx';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icons.jsx';
+import { AuthOrbit } from '../components/Loader.jsx';
 import { api } from '../lib/api.js';
 
 export default function VerifyEmail() {
@@ -24,7 +25,7 @@ export default function VerifyEmail() {
       .catch((error) => setState({ type: 'error', message: error.message }));
   }, []);
 
-  return <main className="simple-page"><div className="simple-card">
+  return <main className="simple-page"><AuthOrbit/><div className={`simple-card verify-card verify-${state.type}`}>
     <div className={`large-icon ${state.type === 'error' ? 'error-icon' : 'success-icon'}`}>
       {state.type === 'loading' ? <span className="spinner"/> : <Icon name={state.type === 'success' ? 'check' : 'mail'} size={34}/>}
     </div>
@@ -32,5 +33,6 @@ export default function VerifyEmail() {
     <h1>{state.type === 'loading' ? t("Մի պահ...") : state.type === 'success' ? t("Հաջողված է 🎉") : t("Հղման խնդիր")}</h1>
     <p>{t(state.message)}</p>
     {state.type !== 'loading' && <Link className="btn btn-primary btn-block" to="/auth?mode=login">{state.type === 'success' ? t("Գնալ մուտքի էջ") : t("Վերադառնալ գրանցման էջ")} <Icon name="arrow" size={17}/></Link>}
+    <div className="auth-footer-note"><Icon name="shield" size={16}/> {t('Քո տվյալները պաշտպանված են')}</div>
   </div></main>;
 }

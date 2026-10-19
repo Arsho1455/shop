@@ -21,7 +21,7 @@ export const MyHeader = () => {
     if (location.pathname === '/') {
       setSearch(new URLSearchParams(location.search).get('q') || '');
     }
-  }, [location.pathname, location.search]);
+  }, [location.pathname, location.search, location.hash]);
 
   const submitSearch = (e) => {
     e.preventDefault();
@@ -41,13 +41,13 @@ export const MyHeader = () => {
         <div className="shop-container shop-header-inner">
           <Link className="shop-logo" to="/" aria-label={t("PhoneShop — Գլխավոր էջ")}>
             <span className="shop-logo-symbol"><ShopIcon name="bolt" size={21} fill="white" /></span>
-            <span>phone<span className="shop-logo-highlight">shop</span><span className="shop-logo-period">.</span></span>
+            <span>phone<span className="shop-logo-highlight">Shop</span><span className="shop-logo-period">.</span></span>
           </Link>
 
-          <nav className={`shop-nav ${menuOpen ? 'is-open' : ''}`} aria-label={t("Հիմնական բաժիններ")}>
-            <NavLink to="/" end className={({isActive}) => `shop-nav-link ${isActive ? 'is-active' : ''}`}>{t("Գլխավոր")}</NavLink>
-            <Link to="/#products" className="shop-nav-link">{t("Տեսականի")}</Link>
-            <NavLink to="/contact" className={({isActive}) => `shop-nav-link ${isActive ? 'is-active' : ''}`}>{t("Կապ մեզ հետ")}</NavLink>
+          <nav id="shop-main-navigation" className={`shop-nav ${menuOpen ? 'is-open' : ''}`} aria-label={t("Հիմնական բաժիններ")}>
+            <NavLink to="/" end onClick={() => setMenuOpen(false)} className={({isActive}) => `shop-nav-link ${isActive ? 'is-active' : ''}`}>{t("Գլխավոր")}</NavLink>
+            <Link to="/#products" onClick={() => setMenuOpen(false)} className="shop-nav-link">{t("Տեսականի")}</Link>
+            <NavLink to="/contact" onClick={() => setMenuOpen(false)} className={({isActive}) => `shop-nav-link ${isActive ? 'is-active' : ''}`}>{t("Կապ մեզ հետ")}</NavLink>
             <form className="shop-nav-search" role="search" onSubmit={submitSearch}><ShopIcon name="search" size={17}/><input aria-label={t("Փնտրել ապրանք")} placeholder={t("Որոնել հեռախոս...")} value={search} onChange={(event) => setSearch(event.target.value)}/><button type="submit" aria-label={t("Որոնել")}><ShopIcon name="arrowRight" size={16}/></button></form>
           </nav>
 
@@ -76,7 +76,7 @@ export const MyHeader = () => {
               <ShopIcon name="user" size={20} />
               <span>{user ? t("Իմ էջը") : t("Մուտք / Գրանցում")}</span>
             </Link>
-            <button type="button" className="shop-mobile-menu" aria-label={menuOpen ? t("Փակել մենյուն") : t("Բացել մենյուն")} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+            <button type="button" className="shop-mobile-menu" aria-label={menuOpen ? t("Փակել մենյուն") : t("Բացել մենյուն")} aria-controls="shop-main-navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
               <ShopIcon name={menuOpen ? 'close' : 'menu'} size={23}/>
             </button>
           </div>

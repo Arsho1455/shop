@@ -87,12 +87,12 @@ export function ProductReviews({ product }) {
   };
 
   return <section className="ph-reviews" id="reviews" aria-labelledby="ph-reviews-title">
-    <div className="ph-reviews-top">
-      <div><span className="shop-eyebrow">{t('ՀԱՃԱԽՈՐԴՆԵՐԻ ԿԱՐԾԻՔՆԵՐ')}</span><h2 id="ph-reviews-title">{t('Գնահատականներ և կարծիքներ')}</h2><p>{t('Կիսվիր ապրանքի մասին քո փորձով։')}</p></div>
+    <div className="ph-reviews-top pd-reveal">
+      <div className="ph-reviews-intro"><span className="shop-eyebrow">{t('ՀԱՃԱԽՈՐԴՆԵՐԻ ԿԱՐԾԻՔՆԵՐ')}</span><h2 id="ph-reviews-title">{t('Գնահատականներ և կարծիքներ')}</h2><p>{t('Կիսվիր ապրանքի մասին քո փորձով։')}</p></div>
       <div className="ph-review-score"><strong>{product.reviews ? product.rating.toFixed(1) : '—'}</strong><Stars rating={Math.round(product.rating)} t={t}/><small>{product.reviews} {t('կարծիք')}</small></div>
     </div>
     <div className="ph-review-layout">
-      <div className="ph-review-list">
+      <div className="ph-review-list pd-reveal">
         {loading && <p className="ph-review-muted">{t('Բեռնվում է...')}</p>}
         {!loading && reviews.length === 0 && <div className="ph-review-empty"><ShopIcon name="star" size={26}/><h3>{t('Դեռ կարծիքներ չկան')}</h3><p>{t('Եղիր առաջինը, ով կգնահատի այս ապրանքը։')}</p></div>}
         {reviews.map((review) => <article className="ph-review-card" key={review.id}>
@@ -103,7 +103,7 @@ export function ProductReviews({ product }) {
         {hasMore && <button className="ph-review-more" disabled={loading} type="button" onClick={async () => { setLoading(true); try { await loadReviews(page + 1); } catch (err) { setError(t(err.message)); } finally { setLoading(false); } }}>{t('Ցույց տալ ավելի շատ կարծիքներ')}</button>}
         {total > 0 && <p className="ph-review-muted">{t('Ցուցադրված է')} {reviews.length} / {total}</p>}
       </div>
-      <form className="ph-review-form" onSubmit={save}>
+      <form className="ph-review-form pd-reveal" onSubmit={save}>
         <h3>{t(myReview ? 'Խմբագրել քո կարծիքը' : 'Գրել կարծիք')}</h3>
         <p>{t('Գնահատիր ապրանքը 1-ից 5 աստղով և թող քո կարծիքը։')}</p>
         <Stars rating={rating} interactive onChange={setRating} t={t}/>

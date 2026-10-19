@@ -1,53 +1,101 @@
-/* Independent, responsive sign-in layout: never uses shop header/footer. */
-.adm-login-screen { min-height:100vh; min-height:100dvh; background:#edf0f7; color:#182643; font-family:inherit; }
-.adm-login-screen * { box-sizing:border-box; }
-.adm-login-layout { display:grid; grid-template-columns:minmax(360px,.92fr) minmax(420px,1.08fr); min-height:100vh; min-height:100dvh; max-width:1800px; margin:auto; background:#fff; box-shadow:0 28px 110px #1b254912; }
-.adm-login-story { position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; padding:48px clamp(32px,5vw,90px) 38px; background:radial-gradient(circle at 0% 100%,#5a59b4 0,transparent 43%),linear-gradient(142deg,#0b1730 8%,#182a53 57%,#21215a 100%); color:#fff; }
-.adm-login-logo,.adm-login-logo-icon,.adm-login-story-badge,.adm-login-story li,.adm-login-story li>span,.adm-login-panel-safe { display:flex; align-items:center; }
-.adm-login-logo { position:relative;z-index:2; gap:14px;font-size:27px;line-height:1;font-weight:850;letter-spacing:-1.2px; }
-.adm-login-logo strong { color:#a49aff; }
-.adm-login-logo small { display:block;margin-top:9px;font-size:9px;letter-spacing:2.5px;color:#9aaacf;font-weight:750; }
-.adm-login-logo-icon { width:53px;height:53px;justify-content:center;background:#685bee;border-radius:17px;box-shadow:0 12px 30px #17123d66; }
-.adm-login-story-center { position:relative;z-index:2;margin:auto 0;padding:95px 0 105px; }
-.adm-login-story-badge { width:max-content;max-width:100%;gap:9px;padding:10px 15px;border:1px solid #8187d25c;border-radius:100px;background:#b9b5f113;color:#cdcafa; font-size:11px; letter-spacing:1.5px;font-weight:800; }
-.adm-login-story h1 { font-size:clamp(38px,4vw,67px);line-height:1.12;letter-spacing:-2.1px;max-width:640px;font-weight:850;margin:26px 0 18px; }
-.adm-login-story p { color:#adb9d4;font-size:16px;line-height:1.85;max-width:460px;margin:0 0 43px; }
-.adm-login-story ul { list-style:none;max-width:420px;margin:0;padding:0;display:grid;gap:11px; }
-.adm-login-story li { gap:14px; background:#ffffff0b;border:1px solid #ffffff1a; border-radius:16px;padding:13px 16px;color:#e3e8fd;font-size:13px;font-weight:700;backdrop-filter:blur(8px); }
-.adm-login-story li>span { justify-content:center;width:38px;height:38px;color:#b6adff;background:#8278ef24;border-radius:10px; }
-.adm-login-story li>svg:last-child {margin-left:auto;color:#a9dccc;}
-.adm-login-story-foot {position:relative;z-index:2;font-size:10px;letter-spacing:1.3px;color:#7285ab;font-weight:750;}
-.adm-login-story-asterisk{color:#7a75e0;padding:0 10px;}
-.adm-login-orb { position:absolute;z-index:0;pointer-events:none;display:block;border-radius:50%;border:1px solid #c7c5ff20; }
-.adm-login-orb.orb-one { width:560px;height:560px;right:-350px;top:24%;box-shadow:0 0 0 100px #c7c5ff05,0 0 0 200px #c7c5ff04; }
-.adm-login-orb.orb-two {width:320px;height:320px;bottom:-220px;left:-180px;background:#7268f010;}
-.adm-login-form-panel { position:relative;display:flex; flex-direction:column; justify-content:center;align-items:center; min-width:0;padding:85px 36px 75px; }
-.adm-login-languages { position:absolute;top:39px;right:clamp(24px,5vw,85px);display:flex;align-items:center;gap:4px;background:#f3f4fa;padding:5px;border-radius:11px; }
-.adm-login-languages button {font-family:inherit;border:0;border-radius:8px;padding:9px 12px;background:none;color:#8b94a7;font-size:12px;font-weight:800;cursor:pointer;}
-.adm-login-languages button[aria-pressed=true] {color:#6759df;background:#fff;box-shadow:0 2px 9px #121a2610;}
-.adm-login-form-wrap { width:min(100%,445px); }
-.adm-login-symbol { display:grid;place-items:center;width:68px;height:68px;border-radius:20px;color:#6d5de9;background:#efedff;margin-bottom:28px; }
-.adm-login-eyebrow {font-size:11px;font-weight:900;letter-spacing:2.2px;color:#7264e6;}
-.adm-login-form-wrap h2 {font-size:clamp(31px,3.7vw,46px);font-weight:850;letter-spacing:-1.7px;margin:12px 0 13px;color:#14233e;}
-.adm-login-dot {color:#7061e7;}
-.adm-login-description {font-size:14px;line-height:1.85;color:#8a98ad;max-width:430px;margin:0 0 35px;}
-.adm-login-form {display:flex;flex-direction:column;}
-.adm-login-form>label {font-size:12px;font-weight:800;color:#394860;margin-bottom:10px;}
-.adm-login-input-frame {display:flex;align-items:center;gap:12px;padding:0 16px;border-radius:13px;border:1.5px solid #e6e9f2;min-height:57px; color:#a0aabe;margin-bottom:25px;transition:border-color .2s,box-shadow .2s;}
-.adm-login-input-frame:focus-within {border-color:#7161e7;box-shadow:0 0 0 4px #7464e914;}
-.adm-login-input-frame input {min-width:0;flex:1;color:#1b2a45;font-size:14px;background:transparent;border:none;outline:none;height:53px;font-family:inherit;}
-.adm-login-input-frame input::placeholder {color:#b2bbca;}
-.adm-password-toggle {color:#7566df;background:none;border:0;cursor:pointer;font-size:11px;font-weight:800;white-space:nowrap;font-family:inherit;}
-.adm-login-submit {display:flex;justify-content:center;align-items:center;gap:15px;width:100%;min-height:58px;margin-top:2px;color:white;border:0;border-radius:13px;background:linear-gradient(105deg,#7769ed,#6553d7);box-shadow:0 14px 29px #6d5ee83a;font-size:14px;font-weight:850;font-family:inherit;cursor:pointer;transition:transform .2s,box-shadow .2s;}
-.adm-login-submit:hover:not(:disabled) {transform:translateY(-1px);box-shadow:0 18px 31px #6d5ee84b;}
-.adm-login-submit:disabled {opacity:.65;cursor:wait;}
-.adm-login-error {color:#b53645;background:#fff1f3;border:1px solid #ffd6de;padding:13px 15px;border-radius:10px;font-size:12px;margin-bottom:20px;}
-.adm-login-guard {display:flex;align-items:center;justify-content:center;gap:10px;padding:25px 0;margin-top:25px;border-top:1px solid #ecedf5;font-size:12px;color:#8996a9;text-align:center;}
-.adm-login-guard svg {color:#7669e0;flex-shrink:0;}
-.adm-login-back {display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;color:#685ad8;font-size:13px;font-weight:800;}
-.adm-login-back:hover{text-decoration:underline;}
-.adm-login-panel-foot {position:absolute;bottom:29px;left:36px;right:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:10px;color:#b0b9c8;}
-.adm-login-panel-safe {gap:7px;}
-@media(max-width:1050px){.adm-login-layout{grid-template-columns:minmax(300px,.9fr) minmax(350px,1.1fr)}.adm-login-story{padding:35px}.adm-login-story-center{padding:70px 0}.adm-login-story h1{font-size:41px}}
-@media(max-width:760px){.adm-login-layout{display:block;min-height:100dvh}.adm-login-story{min-height:0;padding:22px 24px;background:#111f42}.adm-login-story-center,.adm-login-story-foot,.adm-login-orb{display:none}.adm-login-logo{font-size:22px}.adm-login-logo-icon{width:42px;height:42px}.adm-login-form-panel{min-height:calc(100dvh - 91px);padding:100px 22px 85px}.adm-login-languages{top:24px;right:22px}.adm-login-form-wrap{max-width:445px}.adm-login-panel-foot{left:22px;right:22px}.adm-login-form-wrap h2{font-size:37px}}
-@media(max-width:390px){.adm-login-panel-foot{flex-direction:column;gap:7px}.adm-login-form-panel{padding-bottom:105px}.adm-login-description{margin-bottom:26px}}
+/* Separate management entrance with a quiet, dimensional security illustration. */
+.adm-login-screen { min-height: 100vh; min-height: 100dvh; color: #f2f5f8; background: #07090d; font-family: inherit; color-scheme: dark; }
+.adm-login-screen *, .adm-login-screen *::before, .adm-login-screen *::after { box-sizing: border-box; }
+.adm-login-screen button:focus-visible, .adm-login-screen a:focus-visible { outline: 2px solid #92dfe4; outline-offset: 4px; }
+.adm-login-layout { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(420px, 1fr); min-height: 100vh; min-height: 100dvh; max-width: 1800px; margin: auto; background: #07090d; }
+.adm-login-story { position: relative; isolation: isolate; display: flex; flex-direction: column; overflow: hidden; min-width: 0; padding: 45px clamp(32px, 4vw, 75px) 34px; border-right: 1px solid #ffffff0c; color: #f2f5f8; background: radial-gradient(ellipse at 92% 50%, #70b6ed12, transparent 55%), radial-gradient(ellipse at 0% 100%, #92dfe40a, transparent 55%), #0b1016; }
+.adm-login-logo, .adm-login-logo-icon, .adm-login-story-badge, .adm-login-story li, .adm-login-story li>span, .adm-login-panel-safe { display: flex; align-items: center; }
+.adm-login-logo { position: relative; z-index: 2; gap: 13px; color: #f2f5f8; font-size: 26px; font-weight: 800; letter-spacing: -1.1px; line-height: 1; }
+.adm-login-logo strong { color: #92dfe4; }
+.adm-login-logo small { display: block; margin-top: 9px; color: #8195a3; font-size: 8px; font-weight: 600; letter-spacing: 2.4px; }
+.adm-login-logo-icon { justify-content: center; width: 49px; height: 52px; border: 1px solid #92dfe438; border-radius: 15px; background: linear-gradient(145deg, #243842, #101c25); box-shadow: inset 0 1px 0 #ffffff20, 0 12px 30px #0004; }
+.adm-login-logo-icon svg { fill: #92dfe4; color: #92dfe4; }
+.adm-login-story-center { position: relative; z-index: 2; margin: auto 0; padding: 90px 0 85px; }
+.adm-login-story-badge { width: max-content; max-width: 100%; gap: 8px; padding: 9px 12px; border: 1px solid #92dfe426; border-radius: 100px; color: #a7e3e7; background: #92dfe409; font-size: 9px; font-weight: 600; letter-spacing: 1.5px; }
+.adm-login-story h1 { max-width: 620px; margin: 29px 0 22px; font-size: clamp(40px, 4vw, 65px); font-weight: 500; line-height: 1.13; letter-spacing: -2.4px; text-wrap: balance; }
+.adm-login-story p { max-width: 400px; margin: 0 0 40px; color: #91a0af; font-size: 14px; line-height: 1.9; }
+.adm-login-story ul { display: grid; gap: 10px; max-width: 390px; margin: 0; padding: 0; list-style: none; }
+.adm-login-story li { gap: 13px; padding: 12px 15px; border: 1px solid #ffffff0d; border-radius: 12px; color: #b9c7d1; background: #10151cbd; backdrop-filter: blur(14px); font-size: 11px; font-weight: 550; }
+.adm-login-story li>span { justify-content: center; flex-shrink: 0; width: 33px; height: 33px; border: 1px solid #92dfe418; border-radius: 9px; color: #92dfe4; background: #92dfe407; }
+.adm-login-story li>svg:last-child { margin-left: auto; color: #93c9ba; flex-shrink: 0; }
+.adm-login-story-foot { position: relative; z-index: 2; color: #657785; font-size: 9px; font-weight: 600; letter-spacing: 1.3px; }
+.adm-login-story-asterisk { padding: 0 9px; color: #92dfe4; }
+.adm-login-orb { position: absolute; z-index: 0; display: block; border: 1px solid #92dfe40c; border-radius: 50%; pointer-events: none; }
+.adm-login-orb.orb-one { top: 20%; right: -315px; width: 600px; height: 600px; box-shadow: 0 0 0 95px #92dfe403, 0 0 0 190px #92dfe402; }
+.adm-login-orb.orb-two { bottom: -210px; left: -170px; width: 330px; height: 330px; background: #92dfe403; }
+.adm-login-device-scene { position: absolute; z-index: 1; top: 26%; right: -80px; width: 300px; height: 420px; perspective: 1000px; opacity: .36; pointer-events: none; }
+.adm-login-device { position: absolute; top: 30px; left: 45px; width: 172px; height: 326px; padding: 8px; border: 1px solid #a2cad65c; border-radius: 29px; background: linear-gradient(135deg, #304957, #101923 70%); box-shadow: -7px 5px 0 #213543, -8px 5px 0 1px #92dfe429, -22px 35px 60px #0008, inset 1px 1px 2px #ffffff39; transform: rotateY(-25deg) rotateZ(17deg); transform-style: preserve-3d; animation: adm-device-float 9s ease-in-out infinite; }
+.adm-login-device-display { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; height: 100%; padding: 30px 20px; border: 1px solid #ffffff0f; border-radius: 22px; color: #92dfe4; background: radial-gradient(circle at 50% 40%, #92dfe419, transparent 60%), #0b151e; }
+.adm-login-device-display>svg { margin-bottom: 18px; filter: drop-shadow(0 0 18px #92dfe44d); }
+.adm-login-device-display>span { width: 86px; height: 5px; border-radius: 10px; background: #92dfe42a; }
+.adm-login-device-display>span:nth-last-child(2) { width: 65px; }
+.adm-login-device-display>span:last-child { width: 39px; height: 18px; margin-top: 9px; background: #92dfe450; }
+.adm-login-device-camera { position: absolute; z-index: 1; left: calc(50% - 22px); top: 15px; width: 44px; height: 10px; border-radius: 10px; background: #020609; }
+.adm-login-device-ring { position: absolute; top: 73px; left: -25px; width: 350px; height: 230px; border: 1px solid #92dfe43b; border-radius: 50%; transform: rotateZ(-26deg) rotateX(42deg); box-shadow: 0 0 0 24px #92dfe403; }
+.adm-login-device-satellite { position: absolute; right: 29px; bottom: 48px; display: grid; place-items: center; width: 57px; height: 57px; border: 1px solid #92dfe440; border-radius: 16px; color: #92dfe4; background: linear-gradient(145deg, #1b3845, #0e1c26); box-shadow: -5px 5px 0 #0f202c, -12px 16px 32px #0008; transform: rotateZ(-12deg); animation: adm-satellite-float 8s ease-in-out infinite; }
+.adm-login-form-panel { position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; min-width: 0; padding: 100px 45px 90px; background: radial-gradient(ellipse at 60% 30%, #70b6ed03, transparent 60%); }
+.adm-login-languages { position: absolute; top: 38px; right: clamp(28px, 4vw, 75px); display: flex; align-items: center; gap: 3px; padding: 4px; border: 1px solid #ffffff12; border-radius: 9px; background: #0c1016; }
+.adm-login-languages button { padding: 8px 11px; border: 0; border-radius: 5px; color: #91a0af; background: none; font-size: 11px; font-family: inherit; font-weight: 600; cursor: pointer; }
+.adm-login-languages button[aria-pressed=true] { color: #b6ebed; background: #92dfe412; }
+.adm-login-form-wrap { width: min(100%, 430px); animation: adm-login-enter .7s ease both; }
+.adm-login-symbol { display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 29px; border: 1px solid #92dfe42e; border-radius: 17px; color: #92dfe4; background: linear-gradient(140deg, #172c35, #101b23); box-shadow: inset 0 1px 0 #ffffff10, 0 12px 30px #0003; }
+.adm-login-eyebrow { color: #92dfe4; font-size: 9px; font-weight: 650; letter-spacing: 2.3px; }
+.adm-login-form-wrap h2 { margin: 15px 0 16px; color: #f2f5f8; font-size: clamp(31px, 3.1vw, 44px); font-weight: 500; letter-spacing: -1.7px; line-height: 1.25; }
+.adm-login-dot { color: #92dfe4; }
+.adm-login-description { max-width: 420px; margin: 0 0 34px; color: #91a0af; font-size: 12px; line-height: 1.9; }
+.adm-login-form { display: flex; flex-direction: column; }
+.adm-login-form>label { margin-bottom: 10px; color: #c0cbd3; font-size: 11px; font-weight: 550; }
+.adm-login-input-frame { display: flex; align-items: center; gap: 12px; min-height: 56px; margin-bottom: 24px; padding: 0 15px; border: 1px solid #ffffff19; border-radius: 9px; color: #6d8392; background: #0c1117; transition: border-color .2s, box-shadow .2s; }
+.adm-login-input-frame:focus-within { border-color: #92dfe480; box-shadow: 0 0 0 3px #92dfe40b; }
+.adm-login-input-frame>svg { flex-shrink: 0; }
+.adm-login-input-frame input { flex: 1; min-width: 0; height: 53px; border: none; outline: none; color: #edf3f7; background: transparent; font-size: 13px; font-family: inherit; }
+.adm-login-input-frame input::placeholder { color: #607583; }
+.adm-login-input-frame input:disabled { opacity: .55; }
+.adm-password-toggle { padding: 8px 0 8px 5px; border: 0; color: #a7dce0; background: none; font-size: 10px; font-weight: 600; font-family: inherit; white-space: nowrap; cursor: pointer; }
+.adm-login-submit { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; min-height: 56px; margin-top: 2px; border: 1px solid #f4f2e8; border-radius: 9px; color: #11161c; background: #f4f2e8; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; transition: background .2s, box-shadow .2s; }
+.adm-login-submit:hover:not(:disabled) { background: #fff; box-shadow: 0 0 35px #f4f2e812; }
+.adm-login-submit:disabled { opacity: .55; cursor: wait; }
+.adm-login-error { margin-bottom: 20px; padding: 14px 15px; border: 1px solid #f0909829; border-radius: 9px; color: #eda9ad; background: #f0909809; font-size: 12px; line-height: 1.7; }
+.adm-login-guard { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; padding: 23px 0; border-top: 1px solid #ffffff0c; color: #758897; font-size: 10px; line-height: 1.8; text-align: center; }
+.adm-login-guard svg { flex-shrink: 0; color: #92dfe4; }
+.adm-login-back { display: flex; align-items: center; justify-content: center; gap: 9px; color: #c3dce2; font-size: 11px; font-weight: 550; text-decoration: none; }
+.adm-login-back:hover { color: #92dfe4; text-decoration: underline; text-underline-offset: 5px; }
+.adm-login-panel-foot { position: absolute; bottom: 28px; left: 36px; right: 36px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #657785; font-size: 9px; }
+.adm-login-panel-safe { gap: 7px; }
+.adm-login-panel-safe svg { flex-shrink: 0; }
+@keyframes adm-login-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes adm-device-float { 0%, 100% { transform: rotateY(-25deg) rotateZ(17deg) translateY(0); } 50% { transform: rotateY(-16deg) rotateZ(14deg) translateY(-14px); } }
+@keyframes adm-satellite-float { 0%, 100% { transform: rotateZ(-12deg) translateY(0); } 50% { transform: rotateZ(-8deg) translateY(10px); } }
+@media (max-width: 1050px) {
+  .adm-login-layout { grid-template-columns: minmax(300px, .9fr) minmax(350px, 1.1fr); }
+  .adm-login-story { padding: 35px; }
+  .adm-login-story-center { padding: 80px 0; }
+  .adm-login-story h1 { font-size: 45px; }
+  .adm-login-form-panel { padding-left: 30px; padding-right: 30px; }
+  .adm-login-device-scene { right: -130px; opacity: .26; }
+  .adm-login-panel-foot { align-items: flex-start; flex-direction: column; gap: 9px; }
+}
+@media (max-width: 760px) {
+  .adm-login-layout { display: block; min-height: 100dvh; }
+  .adm-login-story { min-height: 0; padding: 23px 22px; border-right: 0; border-bottom: 1px solid #ffffff0c; }
+  .adm-login-story-center, .adm-login-story-foot, .adm-login-orb, .adm-login-device-scene { display: none; }
+  .adm-login-logo { font-size: 22px; }
+  .adm-login-logo-icon { width: 39px; height: 42px; border-radius: 12px; }
+  .adm-login-logo small { font-size: 7px; letter-spacing: 1.8px; }
+  .adm-login-form-panel { min-height: calc(100dvh - 89px); padding: 100px 24px 90px; }
+  .adm-login-languages { top: 24px; right: 24px; }
+  .adm-login-form-wrap { max-width: 430px; }
+  .adm-login-form-wrap h2 { font-size: 35px; }
+  .adm-login-symbol { width: 52px; height: 52px; margin-bottom: 25px; }
+  .adm-login-panel-foot { flex-direction: row; align-items: center; left: 24px; right: 24px; }
+  .adm-login-input-frame input { font-size: 16px; }
+}
+@media (max-width: 390px) {
+  .adm-login-form-panel { padding: 93px 20px 110px; }
+  .adm-login-form-wrap h2 { font-size: 31px; letter-spacing: -1.3px; }
+  .adm-login-languages { right: 20px; }
+  .adm-login-description { margin-bottom: 28px; }
+  .adm-login-panel-foot { flex-direction: column; align-items: center; gap: 9px; left: 20px; right: 20px; }
+  .adm-login-guard { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .adm-login-screen *, .adm-login-screen *::before, .adm-login-screen *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

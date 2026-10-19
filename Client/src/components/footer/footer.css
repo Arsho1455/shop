@@ -1,2 +1,47 @@
-.footer{background:#23233d;color:white;padding:62px 0 0;margin-top:0}.footer-main{display:grid;grid-template-columns:1.5fr .75fr .75fr 1fr;gap:clamp(20px,3vw,45px);padding-bottom:53px}.footer-logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:24px;color:white;font-weight:900;letter-spacing:-1.2px}.footer-logo span{display:grid;place-items:center;width:37px;height:37px;background:#6860e6;border-radius:12px}.footer-logo b{margin-left:-9px;color:#a8a0ff}.footer-logo i{color:#f3b08c;margin-left:-9px;font-style:normal}.footer-brand>p{font-size:12px;color:#aaa9c2;line-height:1.9;max-width:290px;margin:20px 0}.footer-legal{display:flex;align-items:center;gap:8px;font-size:10px;color:#b6b3cd}.footer-legal svg{color:#8cdbc0}.footer-links{display:flex;flex-direction:column;align-items:start;gap:14px}.footer-links strong{font-size:13px;margin-bottom:9px}.footer-links a{color:#aeb0c7;text-decoration:none;font-size:12px;transition:color .2s}.footer-links a:hover{color:#fff}.footer-news{border:1px solid #ffffff20;background:#ffffff08;padding:21px 20px;border-radius:17px;display:flex;flex-direction:column;align-items:start;gap:13px}.footer-news-kicker{letter-spacing:2px;font-size:9px;color:#b9acf9;font-weight:900}.footer-news>strong{line-height:1.55;font-size:17px;letter-spacing:-.4px}.footer-news a{display:inline-flex;gap:8px;align-items:center;font-size:11px;color:#cdc5ff;text-decoration:none;font-weight:800}.footer-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff13;padding:22px 0;font-size:10px;color:#9494ae}.footer-bottom span span{color:#c5b5ff}
-@media(max-width:1000px){.footer-main{grid-template-columns:1fr 1fr}.footer-news{max-width:350px}}@media(max-width:580px){.footer{padding-top:42px}.footer-main{grid-template-columns:1fr 1fr;gap:30px 15px}.footer-brand,.footer-news{grid-column:span 2}.footer-bottom{flex-direction:column;align-items:start}}
+.footer { position: relative; overflow: hidden; margin-top: 0; padding-top: 73px; border-top: 1px solid #ffffff10; color: #f7f8fa; background: #07090d; }
+.footer-main { position: relative; z-index: 1; display: grid; grid-template-columns: 1.4fr .7fr .8fr 1.1fr; gap: clamp(28px, 4vw, 64px); padding-bottom: 65px; }
+.footer-logo { display: inline-flex; align-items: center; gap: 9px; color: #f7f8fa; font-size: 29px; font-weight: 650; letter-spacing: -1.8px; text-decoration: none; }
+.footer-logo > span { display: grid; place-items: center; width: 23px; height: 31px; color: #63e5e7; }
+.footer-logo > span svg { fill: none; stroke-width: 1.5; }
+.footer-logo b { margin-left: -9px; font-weight: 350; }
+.footer-logo i { margin-left: -9px; color: #63e5e7; font-style: normal; }
+.footer-brand > p { max-width: 280px; margin: 23px 0; color: #7f8896; font-size: 11px; line-height: 2; }
+.footer-legal { display: flex; align-items: center; gap: 8px; color: #949ca8; font-size: 9px; }
+.footer-legal svg { color: #63e5e7; width: 13px; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 17px; padding-top: 8px; }
+.footer-links strong { margin-bottom: 9px; color: #e8ecf0; font-size: 11px; font-weight: 500; }
+.footer-links a { position: relative; color: #7f8896; text-decoration: none; font-size: 10px; line-height: 1.6; transition: color .2s ease, transform .2s ease; }
+.footer-links a:hover { color: #63e5e7; transform: translateX(3px); }
+.footer-news { display: flex; flex-direction: column; align-items: flex-start; align-self: start; gap: 19px; padding: 24px 25px 25px; border: 1px solid #ffffff13; border-radius: 3px; background: linear-gradient(145deg, #13212a66, #ffffff02); }
+.footer-news-kicker { display: inline-flex; align-items: center; gap: 8px; color: #7e91a1; font-size: 8px; font-weight: 500; letter-spacing: 2px; }
+.footer-news-kicker::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #ee8b49; box-shadow: 0 0 10px #ee8b4944; }
+.footer-news > strong { max-width: 220px; color: #e7ecf1; font-size: 17px; font-weight: 400; line-height: 1.7; letter-spacing: -.3px; }
+.footer-news > a { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; padding-top: 16px; border-top: 1px solid #ffffff12; color: #63e5e7; font-size: 10px; font-weight: 500; text-decoration: none; }
+.footer-news > a svg { transition: transform .2s ease; }
+.footer-news > a:hover svg { transform: translateX(4px); }
+.footer-bottom { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 24px; border-top: 1px solid #ffffff0e; color: #626b79; font-size: 9px; line-height: 1.7; }
+.footer-bottom span span { display: inline-block; margin-left: 9px; color: #63e5e7; }
+.footer-wordmark { display: flex; align-items: flex-end; justify-content: center; height: clamp(110px, 18vw, 270px); margin: 9px auto 0; overflow: hidden; border-top: 1px solid #ffffff08; pointer-events: none; user-select: none; }
+.footer-wordmark > span { display: block; padding-right: .055em; color: #ffffff05; font-size: clamp(100px, 21.5vw, 345px); font-weight: 600; line-height: .72; letter-spacing: -.075em; white-space: nowrap; }
+.footer-wordmark > span > span { color: #63e5e70b; font-weight: 300; }
+.footer-wordmark i { color: #63e5e71c; font-style: normal; }
+
+@media (max-width: 1000px) {
+  .footer-main { grid-template-columns: 1.3fr 1fr; gap: 42px 65px; }
+  .footer-brand { grid-row: span 2; }
+  .footer-news { grid-column: 2; max-width: 360px; }
+  .footer-links { gap: 14px; }
+}
+@media (max-width: 650px) {
+  .footer { padding-top: 48px; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 36px 28px; padding-bottom: 39px; }
+  .footer-brand { grid-column: 1 / -1; grid-row: auto; }
+  .footer-brand > p { max-width: 370px; margin-block: 16px; }
+  .footer-news { grid-column: 1 / -1; max-width: none; padding: 22px; }
+  .footer-news > strong { max-width: 310px; font-size: 19px; }
+  .footer-news > a { width: auto; min-width: 190px; }
+  .footer-bottom { align-items: flex-start; flex-direction: column; gap: 9px; padding-block: 22px; font-size: 8px; }
+  .footer-wordmark { height: 20vw; }
+  .footer-wordmark > span { font-size: 22vw; }
+}
+@media (prefers-reduced-motion: reduce) { .footer *, .footer *::before { transition: none !important; } }

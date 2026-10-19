@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../i18n/LanguageContext.jsx';
 import Icon from '../components/Icons.jsx';
+import { AuthOrbit } from '../components/Loader.jsx';
 import { api } from '../lib/api.js';
 
 export default function ResetPassword() {
@@ -37,7 +38,7 @@ export default function ResetPassword() {
     finally { setBusy(false); }
   }
 
-  return <main className="simple-page password-reset-page"><div className="simple-card">
+  return <main className="simple-page password-reset-page"><AuthOrbit/><div className="simple-card verify-card">
     <div className="large-icon success-icon"><Icon name={done ? 'check' : 'lock'} size={31}/></div>
     <div className="eyebrow small">{t('ՀԱՇՎԻ ՎԵՐԱԿԱՆԳՆՈՒՄ')}</div>
     <h1>{done ? t('Գաղտնաբառը փոխված է') : t('Սահմանել նոր գաղտնաբառ')}</h1>
@@ -62,5 +63,6 @@ export default function ResetPassword() {
       </form>
       <Link className="text-button back-button" to="/forgot-password"><Icon name="back" size={17}/> {t('Ստանալ նոր հղում')}</Link>
     </>}
+    <div className="auth-footer-note"><Icon name="shield" size={16}/> {t('Քո տվյալները պաշտպանված են')}</div>
   </div></main>;
 }

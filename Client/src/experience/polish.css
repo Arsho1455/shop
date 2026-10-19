@@ -1,0 +1,21 @@
+/* Shared readability refinements retain each page's established composition. */
+.site-experience .shop-nav-link { font-size:12px; }
+.site-experience .shop-header-search input { font-size:11px; }
+.site-experience .shop-account-btn { font-size:11px; }
+.site-experience .footer-brand>p { font-size:12px; }
+.site-experience .footer-links a { font-size:11px; }
+.site-experience .footer-bottom { font-size:10px; }
+.ph-home .ph-hero-copy>p { font-size:14px; }
+.ph-home .ph-section-head p { font-size:13px; }
+.ph-home .ph-filter-pill { font-size:12px; min-height:40px; }
+.ph-home .ph-filter-toggle { font-size:11px; }
+.ph-home .ph-sort-control { font-size:10px; }
+.ph-home .ph-card-name { font-size:17px; }
+.ph-home .ph-card-meta { font-size:10px; }
+.ph-home .ph-card-cart-btn { font-size:10px; min-height:43px; }
+.ph-home .ph-benefit p,.ph-home .ph-story-copy p { font-size:13px; }
+.shop-product-page .shop-product-description { font-size:14px; }
+.shop-product-page .shop-product-login-tip { font-size:10px; }
+.shop-product-page .pd-detail-links a { font-size:11px; }
+@media(max-width:1100px) { .ph-home .ph-card-name { font-size:15px; }.ph-home .ph-card-cart-btn { font-size:9px; } }
+@media(max-width:650px) { .ph-home .ph-hero-copy>p { font-size:12px; line-height:1.9; }.ph-home .ph-section-head p { font-size:12px; }.ph-home .ph-card-name { font-size:13px; }.ph-home .ph-card-meta { font-size:8px; }.ph-home .ph-filter-pill { font-size:10px; min-height:38px; }.ph-home .ph-sort-control { font-size:10px; }.ph-home .ph-benefit p,.ph-home .ph-story-copy p { font-size:12px; }.shop-product-page .shop-product-description { font-size:13px; }.shop-product-page .shop-product-login-tip { font-size:10px; }.shop-product-page .pd-detail-links a { font-size:9px; }.site-experience .shop-account-btn { font-size:10px; } }

@@ -250,3 +250,209 @@
 .shop-auth .password-reset-page .simple-card{width:100%;max-width:470px}
 .shop-auth .password-reset-page .auth-form{text-align:left;margin-top:20px}
 .shop-auth .password-reset-page .back-button{display:inline-flex;align-items:center;gap:8px;margin-top:20px}
+
+/* Premium account access. Kept within the authentication routes. */
+.shop-auth { background: #07090d; color: #f2f5f8; }
+.shop-auth :is(.auth-main, .simple-page) {
+  --auth-ink: #f2f5f8;
+  --auth-muted: #91a0af;
+  --auth-cyan: #92dfe4;
+  --auth-line: rgba(183, 207, 225, .13);
+  isolation: isolate;
+  color: var(--auth-ink);
+  background: radial-gradient(ellipse at 16% 32%, #15262b55, transparent 48%), radial-gradient(ellipse at 88% 85%, #10233840, transparent 42%), #07090d;
+}
+.shop-auth .auth-main { padding: 76px 0 46px; min-height: calc(100vh - 100px); }
+.shop-auth .auth-main::before,
+.shop-auth .simple-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .16;
+  pointer-events: none;
+  background-image: linear-gradient(#91c8d011 1px, transparent 1px), linear-gradient(90deg, #91c8d011 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(180deg, transparent, black 20%, black 70%, transparent);
+}
+.shop-auth .auth-blur { opacity: .08; width: 450px; height: 450px; }
+.shop-auth .auth-blur.one { background: #92dfe4; left: -300px; }
+.shop-auth .auth-blur.two { background: #70b6ed; right: -300px; }
+.shop-auth .auth-layout { width: min(1180px, calc(100% - 80px)); max-width: 1180px; grid-template-columns: minmax(0, 1fr) minmax(0, .96fr); gap: clamp(50px, 7vw, 110px); min-height: 0; align-items: center; }
+.shop-auth .auth-aside { min-width: 0; padding: 0; }
+.shop-auth :is(.auth-main, .simple-page) .eyebrow { color: #92dfe4; font-size: 11px; font-weight: 650; letter-spacing: 1.5px; line-height: 1.7; }
+.shop-auth .auth-main .live-dot { width: 6px; height: 6px; background: #92dfe4; box-shadow: 0 0 0 5px #92dfe410, 0 0 18px #92dfe470; }
+.shop-auth .auth-aside h1 { font-size: clamp(36px, 3.55vw, 54px); font-weight: 600; letter-spacing: -2.3px; line-height: 1.25; margin: 24px 0 20px; }
+.shop-auth .auth-main .gradient-text { background-image: linear-gradient(110deg, #f3f6f8 10%, #a4d8e3 68%, #70b6ed); }
+.shop-auth .auth-aside > p { max-width: 440px; font-size: 15px; color: #91a0af; line-height: 1.85; margin: 0; }
+.shop-auth .auth-device-scene { height: 264px; width: 100%; position: relative; margin: 28px 0 20px; perspective: 1000px; transform-style: preserve-3d; }
+.shop-auth .auth-device-scene::before { content: ""; width: 260px; height: 135px; position: absolute; left: 50%; top: 48%; transform: translate(-50%, -50%); background: #68b7c11c; filter: blur(50px); border-radius: 50%; }
+.shop-auth .auth-device { width: 124px; height: 237px; position: absolute; left: 42%; top: 7px; padding: 5px; border-radius: 26px; background: linear-gradient(110deg, #182029, #8b9da8 36%, #243442 56%, #111a23); border: 1px solid #9baeb873; box-shadow: -9px 14px 0 -6px #111b23, -10px 15px 0 -6px #74909d91, 12px 25px 40px #0008; transform: rotateY(-23deg) rotateX(12deg) rotateZ(16deg); animation: auth-device-float 7s ease-in-out infinite; }
+.shop-auth .auth-device-screen { height: 100%; overflow: hidden; border: 1px solid #07090d; border-radius: 21px; position: relative; background: linear-gradient(155deg, #192f3a, #0c151d 46%, #101923); display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.shop-auth .auth-device-screen::after { content: ""; width: 160px; height: 340px; position: absolute; top: -125px; left: -80px; background: linear-gradient(100deg, #ffffff0a, transparent 60%); transform: rotate(30deg); pointer-events: none; }
+.shop-auth .auth-device-camera { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 3; background: #07090d; width: 42px; height: 10px; border-radius: 10px; border: 1px solid #40515b4d; }
+.shop-auth .auth-device-screen > svg { color: #b2ebed; position: relative; margin-top: -8px; filter: drop-shadow(0 0 14px #70dbdd66); }
+.shop-auth .auth-device-aura { position: absolute; width: 130px; height: 130px; border: 1px solid #92dfe426; border-radius: 50%; top: 25px; left: -10px; box-shadow: 0 0 0 18px #92dfe408, 0 0 0 36px #92dfe405; }
+.shop-auth .auth-device-brand { position: relative; color: #c4e8ea; font-size: 7px; letter-spacing: 2.1px; font-weight: 600; margin-top: 15px; }
+.shop-auth .auth-device-lines { position: absolute; bottom: 27px; left: 23px; right: 23px; display: grid; gap: 5px; }
+.shop-auth .auth-device-lines i { height: 4px; background: #9ad7e020; border-radius: 8px; }
+.shop-auth .auth-device-lines i:nth-child(2) { width: 70%; }
+.shop-auth .auth-device-lines i:nth-child(3) { width: 50%; }
+.shop-auth .auth-device-orbit { position: absolute; border: 1px solid #96bfce25; border-radius: 50%; left: 15%; top: 18%; width: 75%; height: 65%; transform: rotateX(62deg) rotateZ(-20deg); }
+.shop-auth .auth-device-orbit.orbit-two { width: 64%; height: 90%; top: 0; left: 25%; border-color: #96bfce14; transform: rotateX(48deg) rotateY(28deg) rotateZ(28deg); }
+.shop-auth .auth-device-badge { position: absolute; display: flex; align-items: center; gap: 12px; left: 5%; bottom: 26px; max-width: 90%; padding: 15px 17px; border: 1px solid #a0c4d32b; border-radius: 15px; background: linear-gradient(115deg, #1a262ee8, #111a24eb); box-shadow: 0 16px 30px #0006, inset 0 1px #f2f5f80a; backdrop-filter: blur(12px); transform: translateZ(30px) rotate(-3deg); animation: auth-badge-float 6s ease-in-out infinite; }
+.shop-auth .auth-device-badge > span { color: #a8e6d8; border: 1px solid #a8e6d835; border-radius: 50%; padding: 6px; display: grid; place-items: center; background: #a8e6d80a; }
+.shop-auth .auth-device-badge strong { display: block; font-size: 11px; line-height: 1.6; font-weight: 600; }
+.shop-auth .auth-device-badge small { display: block; color: #91a0af; font-size: 10px; margin-top: 3px; letter-spacing: 1px; }
+.shop-auth .auth-device-badge > svg { color: #92dfe480; margin-left: 7px; flex: none; }
+.shop-auth .auth-device-spark { position: absolute; width: 5px; height: 5px; background: #b2dce4; border-radius: 50%; box-shadow: 0 0 16px #a7e8f0a1; }
+.shop-auth .auth-device-spark.spark-one { top: 29%; left: 19%; }
+.shop-auth .auth-device-spark.spark-two { top: 66%; right: 17%; width: 3px; height: 3px; }
+.shop-auth .aside-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-top: 23px; margin-top: 0; border-top: 1px solid var(--auth-line); }
+.shop-auth .aside-points > div { display: block; min-width: 0; }
+.shop-auth .aside-points > div > span { background: transparent; border: 0; width: 24px; height: 24px; border-radius: 0; color: #92dfe4; margin-bottom: 12px; }
+.shop-auth .aside-points strong { font-size: 12px; line-height: 1.7; color: #d5dfe7; font-weight: 500; }
+.shop-auth .aside-points small { font-size: 11px; line-height: 1.7; color: #7f8e9e; margin-top: 8px; }
+.shop-auth .aside-bottom { margin-top: 28px; color: #7f8e9e; font-size: 12px; letter-spacing: .15px; }
+.shop-auth .aside-orb { color: #92dfe4; font-size: 18px; }
+.shop-auth .auth-card { min-width: 0; padding: 36px 36px 28px; border-radius: 24px; border: 1px solid #c5d9e51c; background: linear-gradient(145deg, #151c24fa, #0e131afa 72%); box-shadow: 0 35px 80px #0005, inset 0 1px #ffffff07; overflow: hidden; }
+.shop-auth .auth-card-edge { position: absolute; top: 0; height: 1px; left: 18%; width: 64%; background: linear-gradient(90deg, transparent, #b4e9f280, transparent); }
+.shop-auth .card-heading { gap: 16px; }
+.shop-auth .card-ornament { width: 42px; height: 42px; flex: none; border: 1px solid #bed7e028; border-radius: 12px; background: linear-gradient(145deg, #9ad7e015, #70b6ed08); color: #92dfe4; }
+.shop-auth .card-top-label { color: #91a0af; font-size: 10px; line-height: 1.8; font-weight: 500; letter-spacing: 1.1px; text-align: right; }
+.shop-auth .auth-card h2 { color: #f2f5f8; font-size: clamp(25px, 2.5vw, 33px); font-weight: 600; letter-spacing: -.9px; line-height: 1.4; margin: 26px 0 9px; }
+.shop-auth .auth-description { font-size: 14px; color: #91a0af; line-height: 1.8; margin-bottom: 26px; }
+.shop-auth .auth-tabs { margin-bottom: 25px; border-radius: 12px; background: #070b10; border: 1px solid #b5cfdf13; padding: 5px; gap: 5px; }
+.shop-auth .auth-tabs button { min-width: 0; font-size: 13px; font-weight: 500; line-height: 1.5; color: #7f8e9e; border-radius: 8px; padding: 11px 8px; transition: background .2s, color .2s, box-shadow .2s; }
+.shop-auth .auth-tabs button:hover { color: #e6eff4; }
+.shop-auth .auth-tabs button.active { color: #edf6f9; background: #1a242d; box-shadow: 0 3px 12px #0004, inset 0 1px #c3e0ee15; }
+.shop-auth :is(.auth-main, .simple-page) .auth-form { gap: 18px; }
+.shop-auth :is(.auth-main, .simple-page) .field > span { color: #becbd5; font-size: 12px; font-weight: 500; margin-bottom: 9px; line-height: 1.6; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap { background: #080d13; border: 1px solid #b5ccdc20; border-radius: 11px; min-height: 52px; padding: 0 15px; gap: 12px; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap:hover { border-color: #b5ccdc37; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap:focus-within { border-color: #92dfe48c; box-shadow: 0 0 0 3px #92dfe40a; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap > svg { color: #748797; width: 18px; height: 18px; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap input { color: #f2f5f8; font-size: 14px; padding: 15px 0; line-height: 1.5; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap input::placeholder { color: #617181; opacity: 1; }
+.shop-auth :is(.auth-main, .simple-page) .input-wrap input:-webkit-autofill { -webkit-text-fill-color: #f2f5f8; -webkit-box-shadow: 0 0 0 100px #080d13 inset; caret-color: #92dfe4; }
+.shop-auth :is(.auth-main, .simple-page) .password-toggle { padding: 8px 0 8px 8px; color: #7f91a0; }
+.shop-auth :is(.auth-main, .simple-page) .password-toggle:hover { color: #92dfe4; }
+.shop-auth :is(.auth-main, .simple-page) .btn { border-radius: 11px; font-size: 13px; font-weight: 650; line-height: 1.6; min-height: 52px; padding: 14px 18px; white-space: normal; text-align: center; }
+.shop-auth :is(.auth-main, .simple-page) .btn-primary { color: #0a1016; background: #edf0ed; border: 1px solid #ffffff78; box-shadow: 0 8px 24px #0003, inset 0 1px #fff; }
+.shop-auth :is(.auth-main, .simple-page) .btn-primary:not(:disabled):hover { color: #0a1016; background: #d4edf0; box-shadow: 0 10px 30px #92dfe414; transform: translateY(-2px); }
+.shop-auth :is(.auth-main, .simple-page) .btn-primary > svg { flex: none; }
+.shop-auth :is(.auth-main, .simple-page) .text-button { color: #9acbd8; font-size: 12px; font-weight: 500; line-height: 1.7; padding: 4px 0; }
+.shop-auth :is(.auth-main, .simple-page) .text-button:hover { color: #d7f3f6; }
+.shop-auth :is(.auth-main, .simple-page) .back-button { text-align: left; }
+.shop-auth :is(.auth-main, .simple-page) .alert { text-align: left; font-size: 13px; padding: 12px 14px; border-radius: 10px; line-height: 1.7; overflow-wrap: anywhere; }
+.shop-auth :is(.auth-main, .simple-page) .alert.error { color: #efb4b7; background: #d35d6e0c; border-color: #d35d6e30; }
+.shop-auth :is(.auth-main, .simple-page) .alert.success { color: #a0d7c4; background: #62c3a80a; border-color: #7dd9c130; }
+.shop-auth :is(.auth-main, .simple-page) .auth-footer-note { color: #7f8e9e; font-size: 11px; line-height: 1.7; border-color: #b5ccdc13; margin-top: 25px; padding-top: 20px; }
+.shop-auth :is(.auth-main, .simple-page) .auth-footer-note svg { color: #8ab3c1; flex: none; }
+.shop-auth .auth-main .shop-auth-required-note { color: #b6dbe3; background: #92dfe409; border-color: #92dfe42b; font-size: 13px; }
+.shop-auth .auth-main .forgot-link-row { margin-top: -6px; margin-bottom: -3px; }
+.shop-auth .auth-main .forgot-link-row .text-button { font-size: 12px; }
+.shop-auth .auth-main .back-home { color: #8092a3; margin-top: 38px; font-size: 12px; max-width: calc(100% - 32px); text-align: center; line-height: 1.7; }
+.shop-auth .auth-main .back-home:hover { color: #cce9ee; }
+.shop-auth :is(.auth-main, .simple-page) :is(button, a):focus-visible { outline: 2px solid #92dfe4; outline-offset: 5px; }
+.shop-auth :is(.auth-main, .simple-page) .spinner { border-color: #92dfe42b; border-top-color: #92dfe4; }
+.shop-auth :is(.auth-main, .simple-page) .btn-primary .spinner { border-color: #0a101630; border-top-color: #0a1016; }
+.shop-auth :is(.auth-main, .simple-page) .large-icon { width: 74px; height: 74px; border-radius: 22px; position: relative; }
+.shop-auth :is(.auth-main, .simple-page) .large-icon::after { content: ""; position: absolute; inset: -8px; border: 1px solid #92dfe40c; border-radius: 29px; pointer-events: none; }
+.shop-auth :is(.auth-main, .simple-page) .success-icon { color: #b0e5e7; border-color: #92dfe436; background: linear-gradient(145deg, #92dfe414, #70b6ed08); box-shadow: 0 12px 32px #0003; }
+.shop-auth :is(.auth-main, .simple-page) .error-icon { color: #e4afb6; border-color: #e4afb62b; background: #dc8f9e0b; }
+.shop-auth .auth-main .email-step h2 { margin-top: 15px; font-size: 30px; }
+.shop-auth .auth-main .email-step p { color: #91a0af; font-size: 14px; line-height: 1.9; }
+.shop-auth .auth-main .email-step .eyebrow { margin-top: 7px; }
+.shop-auth .auth-main .email-pill { color: #c4e2e9; background: #070c12; border-color: #bdd8e71c; padding: 13px 19px; font-size: 14px; max-width: 100%; }
+.shop-auth .auth-main .email-step .muted-copy { margin-top: 10px; margin-bottom: 26px; }
+.shop-auth .simple-page { position: relative; overflow: hidden; min-height: 680px; min-height: max(680px, calc(100vh - 260px)); padding: 90px 24px; }
+.shop-auth .simple-card { position: relative; z-index: 2; width: min(490px, 100%); max-width: 490px; padding: 44px 38px 28px; border-radius: 24px; background: linear-gradient(150deg, #151d26f5, #0e141bf5); border-color: #d1e5f21c; box-shadow: 0 35px 90px #0006, inset 0 1px #ffffff08; }
+.shop-auth .simple-card::before { content: ""; position: absolute; height: 1px; left: 18%; right: 18%; top: 0; background: linear-gradient(90deg, transparent, #b4e9f275, transparent); }
+.shop-auth .password-reset-page .simple-card { max-width: 490px; }
+.shop-auth .simple-card h1 { color: #f2f5f8; font-size: clamp(25px, 2.6vw, 32px); font-weight: 600; line-height: 1.4; letter-spacing: -.8px; margin: 18px 0 13px; }
+.shop-auth .simple-card p { color: #91a0af; font-size: 14px; line-height: 1.9; margin-bottom: 24px; }
+.shop-auth .simple-card .btn { margin-top: 26px; }
+.shop-auth .simple-card .auth-form .btn { margin-top: 5px; }
+.shop-auth .simple-card .auth-form { margin-top: 28px; text-align: left; }
+.shop-auth .simple-card .back-button { display: inline-flex; align-items: center; gap: 9px; margin-top: 25px; }
+.shop-auth .simple-card .auth-footer-note { margin-top: 26px; }
+.shop-auth .auth-orbit-stage { position: absolute; left: 50%; top: 50%; width: min(850px, 95vw); height: 650px; pointer-events: none; transform: translate(-50%, -50%); perspective: 1000px; opacity: .6; }
+.shop-auth .auth-orbit-stage span { position: absolute; border: 1px solid #9dcfe221; border-radius: 50%; width: 100%; height: 100%; inset: 0; transform: rotateX(54deg) rotateY(-28deg) rotateZ(-25deg); animation: auth-orbit-drift 18s ease-in-out infinite alternate; }
+.shop-auth .auth-orbit-stage span:nth-child(2) { inset: 8%; width: 84%; height: 84%; border-color: #9dcfe216; transform: rotateX(-34deg) rotateY(40deg) rotateZ(24deg); animation-delay: -8s; animation-direction: alternate-reverse; }
+.shop-auth .auth-orbit-stage span:nth-child(3) { inset: 14%; width: 72%; height: 72%; border-color: #9dcfe211; transform: rotateX(24deg) rotateY(-14deg) rotateZ(45deg); animation: none; }
+.shop-auth .auth-orbit-stage i { position: absolute; top: 28%; left: 12%; width: 5px; height: 5px; border-radius: 50%; background: #c4f2f4; box-shadow: 0 0 18px #b5edf390; }
+.shop-auth .auth-orbit-stage i:last-child { top: auto; left: auto; right: 10%; bottom: 28%; width: 3px; height: 3px; }
+.shop-auth .auth-loading-page .loader-content { min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; color: #91a0af; font-size: 14px; }
+@keyframes auth-device-float { 0%, 100% { transform: translateY(0) rotateY(-23deg) rotateX(12deg) rotateZ(16deg); } 50% { transform: translateY(-10px) rotateY(-16deg) rotateX(8deg) rotateZ(12deg); } }
+@keyframes auth-badge-float { 0%, 100% { transform: translateY(0) translateZ(30px) rotate(-3deg); } 50% { transform: translateY(7px) translateZ(30px) rotate(-1deg); } }
+@keyframes auth-orbit-drift { to { transform: rotateX(44deg) rotateY(-17deg) rotateZ(-8deg); } }
+@media (max-width: 1100px) {
+  .shop-auth .auth-layout { width: calc(100% - 64px); gap: 45px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .shop-auth .auth-card { padding: 30px 27px 25px; }
+  .shop-auth .aside-points { gap: 15px; }
+  .shop-auth .aside-points small { display: none; }
+  .shop-auth .auth-aside h1 { font-size: 37px; letter-spacing: -1.6px; }
+  .shop-auth .auth-device-badge { padding: 13px; left: 0; }
+}
+@media (max-width: 800px) {
+  .shop-auth .auth-main { padding: 44px 0 36px; }
+  .shop-auth .auth-layout { width: calc(100% - 48px); max-width: 540px; grid-template-columns: 1fr; gap: 30px; }
+  .shop-auth .auth-aside { display: block; text-align: center; }
+  .shop-auth .auth-aside h1 { font-size: 38px; line-height: 1.25; margin: 19px 0 14px; }
+  .shop-auth .auth-aside > p { font-size: 14px; max-width: 420px; margin-inline: auto; }
+  .shop-auth .auth-device-scene { height: 205px; margin-top: 17px; margin-bottom: 9px; max-width: 380px; margin-inline: auto; }
+  .shop-auth .auth-device { width: 95px; height: 181px; padding: 4px; border-radius: 22px; left: 44%; }
+  .shop-auth .auth-device-screen { border-radius: 17px; }
+  .shop-auth .auth-device-camera { height: 8px; width: 33px; top: 10px; }
+  .shop-auth .auth-device-screen > svg { width: 35px; height: 35px; }
+  .shop-auth .auth-device-brand { font-size: 5px; letter-spacing: 1.5px; margin-top: 12px; }
+  .shop-auth .auth-device-lines { left: 18px; right: 18px; bottom: 20px; }
+  .shop-auth .auth-device-aura { top: 14px; left: -20px; }
+  .shop-auth .auth-device-badge { left: 6%; bottom: 14px; text-align: left; padding: 11px 13px; gap: 10px; }
+  .shop-auth .auth-device-badge strong { font-size: 10px; }
+  .shop-auth .auth-device-badge small { font-size: 9px; }
+  .shop-auth .aside-points, .shop-auth .aside-bottom { display: none; }
+  .shop-auth .auth-card { padding: 33px 32px 26px; }
+  .shop-auth .auth-card h2 { font-size: 30px; }
+  .shop-auth .auth-main .back-home { margin-top: 28px; }
+  .shop-auth .simple-page { min-height: 650px; padding: 66px 24px; }
+}
+@media (max-width: 480px) {
+  .shop-auth .auth-main { padding-top: 34px; }
+  .shop-auth .auth-layout { width: calc(100% - 32px); gap: 24px; }
+  .shop-auth .auth-aside h1 { font-size: 31px; letter-spacing: -1.1px; }
+  .shop-auth .auth-aside > p { font-size: 13px; line-height: 1.85; max-width: 330px; }
+  .shop-auth .auth-main .eyebrow { font-size: 10px; letter-spacing: 1px; }
+  .shop-auth .auth-device-scene { height: 180px; max-width: 315px; }
+  .shop-auth .auth-device { width: 83px; height: 160px; left: 46%; border-radius: 20px; }
+  .shop-auth .auth-device-screen { border-radius: 15px; }
+  .shop-auth .auth-device-badge { left: 0; max-width: 93%; bottom: 6px; padding: 10px; gap: 8px; }
+  .shop-auth .auth-device-badge > span { padding: 5px; }
+  .shop-auth .auth-device-badge > svg { width: 17px; }
+  .shop-auth .auth-card { padding: 26px 22px 22px; border-radius: 19px; }
+  .shop-auth .card-top-label { font-size: 9px; letter-spacing: .7px; max-width: 180px; }
+  .shop-auth .card-heading { gap: 10px; }
+  .shop-auth .card-ornament { width: 37px; height: 37px; border-radius: 10px; }
+  .shop-auth .auth-card h2 { font-size: 25px; letter-spacing: -.6px; margin-top: 23px; }
+  .shop-auth .auth-description { font-size: 13px; }
+  .shop-auth .auth-tabs button { font-size: 12px; padding-inline: 6px; }
+  .shop-auth :is(.auth-main, .simple-page) .input-wrap { gap: 10px; padding-inline: 12px; }
+  .shop-auth :is(.auth-main, .simple-page) .input-wrap input { font-size: 16px; }
+  .shop-auth :is(.auth-main, .simple-page) .btn { font-size: 12px; padding-inline: 12px; gap: 9px; }
+  .shop-auth .simple-page { padding: 55px 16px; min-height: 620px; }
+  .shop-auth .simple-card { padding: 34px 23px 24px; border-radius: 20px; }
+  .shop-auth .simple-card h1 { font-size: 26px; }
+  .shop-auth .simple-card p { font-size: 13px; }
+  .shop-auth .simple-card .eyebrow { font-size: 10px; letter-spacing: 1px; }
+  .shop-auth .auth-main .email-step h2 { font-size: 26px; }
+  .shop-auth .auth-main .email-step p { font-size: 13px; }
+  .shop-auth .auth-main .email-pill { font-size: 13px; padding-inline: 12px; }
+}
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .shop-auth .auth-device, .shop-auth .auth-device-badge, .shop-auth .auth-orbit-stage span { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-auth :is(.auth-main, .simple-page) *, .shop-auth :is(.auth-main, .simple-page) *::before, .shop-auth :is(.auth-main, .simple-page) *::after { scroll-behavior: auto; transition-duration: .01ms !important; }
+  .shop-auth :is(.auth-main, .simple-page) .spinner { animation-duration: 1.6s; }
+}

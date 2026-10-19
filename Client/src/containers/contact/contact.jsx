@@ -45,7 +45,7 @@ export const ContactPage = () => {
   }
 
   return (
-    <main className="ph-contact-page shop-container">
+    <main className="ph-contact-page"><div className="contact-page-atmosphere" aria-hidden="true"/><div className="shop-container">
       <div className="ph-contact-heading">
         <span className="shop-eyebrow"><ShopIcon name="sparkle" size={15} /> {t("ՄԻՇՏ ՔՈ ԿՈՂՔԻՆ")}</span>
         <h1>{t("Ունե՞ս հարց։")} <span>{t("Գրիր մեզ։")}</span></h1>
@@ -53,7 +53,7 @@ export const ContactPage = () => {
       </div>
       <div className="ph-contact-grid">
         <section className="ph-contact-highlight">
-          <div className="ph-contact-orb" />
+          <div className="contact-sculpture" data-tilt aria-hidden="true"><div className="contact-sculpture-orbit"/><div className="contact-message-object"><span className="contact-message-back"/><div className="contact-message-letter"><span>phoneShop<span>↗</span></span><i/><i/><i/><b>✦</b></div><div className="contact-envelope"><span/><i/></div><span className="contact-message-star">✳</span></div><span className="contact-art-coordinate">PH / ALWAYS CONNECTED</span></div>
           <span className="ph-contact-eyebrow">{t("ՄԵՆՔ ԿԱՊԻ ՄԵՋ ԵՆՔ")}</span>
           <h2>{t("Լավ ընտրությունը սկսվում է լավ խորհրդից։")}</h2>
           <p>{t("Պատմիր՝ ինչ հեռախոս ես փնտրում, և մենք կօգնենք կողմնորոշվել։")}</p>
@@ -66,7 +66,7 @@ export const ContactPage = () => {
         <section className="ph-contact-form-card">
           <span className="shop-eyebrow">{t("ԿԱՊ ՀԱՍՏԱՏԵԼ")}</span>
           <h2>{t("Ուղարկիր հաղորդագրություն")}</h2>
-          <p>{t("Լրացրու տվյալներդ, և նամակն անմիջապես կուղարկվի մեզ։ Էլ. փոստի ծրագիր բացել պետք չէ։")}</p>
+          <p>{t("Օգնության կարիք ունե՞ս հեռախոս ընտրելիս։ Մենք պատրաստ ենք օգնել։")}</p>
           <form onSubmit={sendMessage}>
             <label htmlFor="contact-name">{t("Քո անունը")}
               <input id="contact-name" autoComplete="name" name="name" value={form.name} onChange={(event) => update('name', event.target.value)} maxLength={60} minLength={2} placeholder={t("Ինչպե՞ս դիմենք քեզ")} required />
@@ -84,11 +84,11 @@ export const ContactPage = () => {
             </div>
             {notice && <p className={`ph-contact-notice ph-contact-notice--${notice.kind}`} role={notice.kind === 'error' ? 'alert' : 'status'} aria-live="polite">{t(notice.text)}</p>}
             <button type="submit" className="shop-btn-primary" disabled={sending}>
-              {sending ? t("Ուղարկվում է…") : t("Ուղարկել հաղորդագրությունը")} <ShopIcon name="arrowRight" size={19} />
+              <span>{sending ? t("Ուղարկվում է…") : t("Ուղարկել հաղորդագրությունը")}</span><i><ShopIcon name="arrowRight" size={19}/></i>
             </button>
           </form>
         </section>
       </div>
-    </main>
+    </div></main>
   );
 };

@@ -75,13 +75,22 @@ export default function Auth() {
     finally { setBusy(false); }
   }
 
-  return <main className="auth-main">
+  return <main className="auth-main" data-auth-mode={mode}>
     <div className="auth-blur one"/><div className="auth-blur two"/>
     <div className="container auth-layout">
       <section className="auth-aside">
         <div className="eyebrow"><span className="live-dot"/> {t("ՔՈ ԱՆՁՆԱԿԱՆ ՏԱՐԱԾՔԸ")}</div>
         <h1>{t("Մեկ քայլ դեպի")}<br/><span className="gradient-text">{t("քո նոր սկիզբը։")}</span></h1>
         <p>{t("Մնա կապի մեջ, կառավարիր քո տվյալները և օգտվիր անվտանգ անձնական տարածքից։")}</p>
+        <div className="auth-device-scene" aria-hidden="true" data-tilt>
+          <span className="auth-device-orbit orbit-one"/><span className="auth-device-orbit orbit-two"/>
+          <div className="auth-device">
+            <span className="auth-device-camera"/>
+            <div className="auth-device-screen"><span className="auth-device-aura"/><Icon name="shield" size={47}/><span className="auth-device-brand">PHONESHOP</span><div className="auth-device-lines"><i/><i/><i/></div></div>
+          </div>
+          <div className="auth-device-badge"><span><Icon name="check" size={16}/></span><div><strong>{t("Քո տվյալները պաշտպանված են")}</strong><small>PhoneShop</small></div><Icon name="shield" size={20}/></div>
+          <span className="auth-device-spark spark-one"/><span className="auth-device-spark spark-two"/>
+        </div>
         <div className="aside-points">
           <div><span><Icon name="shield" size={20}/></span><div><strong>{t("Անվտանգություն՝ առաջին տեղում")}</strong><small>{t("Գաղտնաբառերն ապահով հեշավորվում են։")}</small></div></div>
           <div><span><Icon name="mail" size={20}/></span><div><strong>{t("Հաստատված էլ. հասցե")}</strong><small>{t("Միայն քո էլ. փոստով հասանելի հաշիվ։")}</small></div></div>
@@ -91,6 +100,7 @@ export default function Auth() {
       </section>
 
       <section className="auth-card" aria-labelledby="auth-title">
+        <div className="auth-card-edge" aria-hidden="true"/>
         {searchParams.get('reason') === 'shop' && <p className="shop-auth-required-note">{t("Մուտք գործիր՝ ապրանքը զամբյուղ կամ նախընտրածներ ավելացնելու համար։")}</p>}
         {step === 'check-email' ? <div className="email-step">
           <div className="large-icon success-icon"><Icon name="mail" size={31}/></div>
